@@ -1,0 +1,78 @@
+/* Estilos para los mensajes del chat */
+.mensaje {
+    display: flex;
+    gap: var(--espaciado-sm);
+    margin-bottom: var(--espaciado-md);
+    animation: aparecerMensaje 0.3s ease;
+}
+
+@keyframes aparecerMensaje {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mensaje.usuario {
+    flex-direction: row-reverse;
+}
+
+.mensaje.bot {
+    flex-direction: row;
+}
+
+.icono-mensaje {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.mensaje.usuario .icono-mensaje {
+    background-color: var(--color-primario);
+}
+
+.mensaje.bot .icono-mensaje {
+    background-color: var(--color-secundario);
+}
+
+.icono-mensaje img {
+    width: 24px;
+    height: 24px;
+}
+
+.contenido-mensaje {
+    max-width: 70%;
+    background-color: var(--color-blanco);
+    padding: var(--espaciado-md);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-ligera);
+}
+
+.mensaje.usuario .contenido-mensaje {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.texto-mensaje {
+    margin-bottom: var(--espaciado-xs);
+    line-height: 1.5;
+}
+
+.hora-mensaje {
+    font-size: 0.75rem;
+    color: var(--color-texto-secundario);
+    display: block;
+    text-align: right;
+}
+
+.mensaje.usuario .hora-mensaje {
+    color: rgba(255, 255, 255, 0.7);
+}

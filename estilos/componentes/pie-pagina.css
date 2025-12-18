@@ -1,0 +1,38 @@
+/* Estilos para el pie de página */
+.pie-pagina {
+    background-color: var(--color-texto-principal);
+    color: var(--color-blanco);
+    padding: var(--espaciado-lg);
+    margin-top: auto;
+}
+
+.contenedor-pie {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--espaciado-md);
+}
+
+.texto-copyright {
+    font-size: 0.9rem;
+    color: #adb5bd;
+}
+
+.enlaces-pie {
+    display: flex;
+    gap: var(--espaciado-lg);
+}
+
+.enlace-pie {
+    color: #adb5bd;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.enlace-pie:hover {
+    color: var(--color-blanco);
+}

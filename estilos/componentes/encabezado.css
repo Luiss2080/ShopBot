@@ -1,0 +1,50 @@
+/* Estilos para el encabezado */
+.encabezado-principal {
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-ligera);
+    padding: var(--espaciado-md) var(--espaciado-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contenedor-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--espaciado-md);
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+.titulo-aplicacion {
+    font-size: 1.5rem;
+    color: var(--color-primario);
+    font-weight: 600;
+}
+
+.navegacion-principal {
+    display: flex;
+    gap: var(--espaciado-lg);
+}
+
+.enlace-navegacion {
+    text-decoration: none;
+    color: var(--color-texto-principal);
+    font-weight: 500;
+    padding: var(--espaciado-sm) var(--espaciado-md);
+    border-radius: var(--radio-borde);
+    transition: background-color 0.3s ease;
+}
+
+.enlace-navegacion:hover {
+    background-color: var(--color-fondo);
+    color: var(--color-primario);
+}
+
+.enlace-navegacion.activo {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}

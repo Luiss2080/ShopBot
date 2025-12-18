@@ -1,0 +1,80 @@
+/* Estilos para las tarjetas de producto */
+.tarjeta-producto {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-ligera);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-media);
+}
+
+.imagen-producto {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.imagen-producto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalles-producto {
+    padding: var(--espaciado-md);
+}
+
+.nombre-producto {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--espaciado-sm);
+    color: var(--color-texto-principal);
+}
+
+.descripcion-producto {
+    font-size: 0.9rem;
+    color: var(--color-texto-secundario);
+    margin-bottom: var(--espaciado-md);
+    line-height: 1.5;
+}
+
+.precio-producto {
+    display: flex;
+    align-items: center;
+    gap: var(--espaciado-sm);
+    margin-bottom: var(--espaciado-md);
+}
+
+.precio-actual {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+.precio-anterior {
+    font-size: 1rem;
+    color: var(--color-texto-secundario);
+    text-decoration: line-through;
+}
+
+.boton-agregar-carrito {
+    width: 100%;
+    padding: var(--espaciado-md);
+    background-color: var(--color-exito);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: var(--radio-borde);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-agregar-carrito:hover {
+    background-color: #218838;
+}

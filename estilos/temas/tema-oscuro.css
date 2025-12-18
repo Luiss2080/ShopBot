@@ -1,0 +1,31 @@
+/* Tema claro (por defecto) */
+:root[data-tema="claro"] {
+    --color-primario: #007bff;
+    --color-fondo: #f8f9fa;
+    --color-blanco: #ffffff;
+    --color-texto-principal: #212529;
+    --color-texto-secundario: #6c757d;
+}
+
+/* Tema oscuro */
+:root[data-tema="oscuro"] {
+    --color-primario: #4dabf7;
+    --color-fondo: #1a1a1a;
+    --color-blanco: #2d2d2d;
+    --color-texto-principal: #e9ecef;
+    --color-texto-secundario: #adb5bd;
+}
+
+body[data-tema="oscuro"] {
+    background-color: var(--color-fondo);
+    color: var(--color-texto-principal);
+}
+
+body[data-tema="oscuro"] .encabezado-principal,
+body[data-tema="oscuro"] .contenedor-ventana-chat {
+    background-color: var(--color-blanco);
+}
+
+body[data-tema="oscuro"] .area-mensajes {
+    background-color: #1a1a1a;
+}

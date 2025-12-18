@@ -1,0 +1,52 @@
+/* Variables globales de la aplicación */
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #6c757d;
+    --color-exito: #28a745;
+    --color-peligro: #dc3545;
+    --color-advertencia: #ffc107;
+    --color-info: #17a2b8;
+    
+    --color-texto-principal: #212529;
+    --color-texto-secundario: #6c757d;
+    --color-fondo: #f8f9fa;
+    --color-blanco: #ffffff;
+    
+    --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --fuente-codigo: 'Courier New', monospace;
+    
+    --espaciado-xs: 4px;
+    --espaciado-sm: 8px;
+    --espaciado-md: 16px;
+    --espaciado-lg: 24px;
+    --espaciado-xl: 32px;
+    
+    --radio-borde: 8px;
+    --sombra-ligera: 0 2px 4px rgba(0,0,0,0.1);
+    --sombra-media: 0 4px 8px rgba(0,0,0,0.15);
+    --sombra-fuerte: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    color: var(--color-texto-principal);
+    background-color: var(--color-fondo);
+    line-height: 1.6;
+}
+
+#aplicacion {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#contenido-principal {
+    flex: 1;
+    padding: var(--espaciado-lg);
+}
