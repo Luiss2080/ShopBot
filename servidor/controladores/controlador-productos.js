@@ -1,108 +1,64 @@
-// Controlador de productos - Maneja las solicitudes relacionadas con productos
-const gestorProductos = require('../servicios/gestor-productos');
+const { Producto } = require('../models');
+const { Op } = require('sequelize');
 
 class ControladorProductos {
-    /**
-     * Obtiene todos los productos
-     * @param {object} req - Request
-     * @param {object} res - Response
-     */
-    async obtenerTodos(req, res) {
+    
+    async obtenerTodos(req, res, next) {
         try {
-            const productos = await gestorProductos.obtenerTodos();
-            res.json({
-                exito: true,
-                productos
-            });
+            const productos = await Producto.findAll();
+            res.json(productos);
         } catch (error) {
-            console.error('Error al obtener productos:', error);
-            res.status(500).json({
-                exito: false,
-                error: 'Error al obtener productos'
-            });
+            next(error);
         }
     }
 
-    /**
-     * Obtiene un producto por ID
-     * @param {object} req - Request
-     * @param {object} res - Response
-     */
-    async obtenerPorId(req, res) {
+    async obtenerPorId(req, res, next) {
         try {
             const { id } = req.params;
-            const producto = await gestorProductos.obtenerPorId(id);
-
+            const producto = await Producto.findByPk(id);
             if (!producto) {
-                return res.status(404).json({
-                    exito: false,
-                    error: 'Producto no encontrado'
-                });
+                return res.status(404).json({ error: 'Producto no encontrado' });
             }
-
-            res.json({
-                exito: true,
-                producto
-            });
+            res.json(producto);
         } catch (error) {
-            console.error('Error al obtener producto:', error);
-            res.status(500).json({
-                exito: false,
-                error: 'Error al obtener producto'
-            });
+            next(error);
         }
     }
 
-    /**
-     * Busca productos por término
-     * @param {object} req - Request
-     * @param {object} res - Response
-     */
-    async buscar(req, res) {
+    async buscar(req, res, next) {
         try {
             const { q } = req.query;
-            
             if (!q) {
-                return res.status(400).json({
-                    exito: false,
-                    error: 'El término de búsqueda es requerido'
-                });
+                return res.status(400).json({ error: 'Debe proporcionar un término de búsqueda' });
             }
 
-            const productos = await gestorProductos.buscar(q);
-            res.json({
-                exito: true,
-                productos
+            const productos = await Producto.findAll({
+                where: {
+                    [Op.or]: [
+                        { nombre: { [Op.like]: `%${q}%` } },
+                        { descripcion: { [Op.like]: `%${q}%` } }
+                    ]
+                }
             });
+            res.json(productos);
         } catch (error) {
-            console.error('Error al buscar productos:', error);
-            res.status(500).json({
-                exito: false,
-                error: 'Error al buscar productos'
-            });
+            next(error);
         }
     }
 
-    /**
-     * Obtiene productos por categoría
-     * @param {object} req - Request
-     * @param {object} res - Response
-     */
-    async obtenerPorCategoria(req, res) {
+    async obtenerPorCategoria(req, res, next) {
         try {
             const { categoria } = req.params;
-            const productos = await gestorProductos.obtenerPorCategoria(categoria);
-            
-            res.json({
-                exito: true,
-                productos
+            const productos = await Producto.findAll({
+                where: {
+                    categoria: {
+                        [Op.like]: categoria
+                    }
+                }
             });
+            res.json(productos);
         } catch (error) {
-            console.error('Error al obtener productos por categoría:', error);
-            res.status(500).json({
-                exito: false,
-                error: 'Error al obtener productos'
-            });
+            next(error);
         }
     }
 }

@@ -1,5 +1,4 @@
-const db = require('../modelos/db');
-const { v4: uuidv4 } = require('uuid');
+const { Carrito, Producto } = require('../models');
 
 class ControladorCarrito {
     
@@ -11,19 +10,23 @@ class ControladorCarrito {
                 return res.status(400).json({ error: 'Falta x-session-id' });
             }
 
-            // JOIN con productos para traer la información
-            const query = `
-                SELECT c.id as itemId, c.cantidad, p.* 
-                FROM carrito c 
-                JOIN productos p ON c.productoId = p.id 
-                WHERE c.sessionId = ?
-            `;
-            const items = await db.all(query, [sessionId]);
+            // JOIN manual ya que definimos los modelos independientemente o usar belongsTo
+            // Como Sequelize no sabe la relación sin associate, lo hacemos con consultas anidadas
+            const cartItems = await Carrito.findAll({ where: { sessionId } });
             
-            res.json({
-                items,
-                total: items.reduce((acc, item) => acc + (item.precio * item.cantidad), 0)
-            });
+            let total = 0;
+            const items = await Promise.all(cartItems.map(async (item) => {
+                const producto = await Producto.findByPk(item.productoId);
+                const info = producto ? producto.toJSON() : {};
+                total += (info.precio || 0) * item.cantidad;
+                return {
+                    itemId: item.id,
+                    cantidad: item.cantidad,
+                    ...info
+                };
+            }));
+            
+            res.json({ items, total });
         } catch (error) {
             next(error);
         }
@@ -40,28 +43,25 @@ class ControladorCarrito {
             }
 
             // Verificar que producto existe y hay stock
-            const producto = await db.get("SELECT * FROM productos WHERE id = ?", [productoId]);
+            const producto = await Producto.findByPk(productoId);
             if (!producto) {
                 return res.status(404).json({ error: 'Producto no encontrado' });
             }
 
             // Ver si ya está en el carrito
-            const existente = await db.get(
-                "SELECT * FROM carrito WHERE sessionId = ? AND productoId = ?", 
-                [sessionId, productoId]
-            );
+            const existente = await Carrito.findOne({ 
+                where: { sessionId, productoId }
+            });
 
             if (existente) {
-                await db.run(
-                    "UPDATE carrito SET cantidad = cantidad + ? WHERE id = ?",
-                    [cantidad, existente.id]
-                );
+                existente.cantidad += cantidad;
+                await existente.save();
             } else {
-                const itemId = uuidv4();
-                await db.run(
-                    "INSERT INTO carrito (id, sessionId, productoId, cantidad) VALUES (?, ?, ?, ?)",
-                    [itemId, sessionId, productoId, cantidad]
-                );
+                await Carrito.create({
+                    sessionId,
+                    productoId,
+                    cantidad
+                });
             }
 
             res.status(201).json({ mensaje: 'Producto agregado al carrito exitosamente' });
@@ -80,7 +80,9 @@ class ControladorCarrito {
                 return res.status(400).json({ error: 'Falta x-session-id' });
             }
 
-            await db.run("DELETE FROM carrito WHERE id = ? AND sessionId = ?", [itemId, sessionId]);
+            await Carrito.destroy({
+                where: { id: itemId, sessionId }
+            });
             
             res.json({ mensaje: 'Producto eliminado del carrito' });
         } catch (error) {
