@@ -29,31 +29,13 @@ app.use(bodyParser.urlencoded({ extended: true, limit: configServidor.limites.ta
 // Registrador de solicitudes
 app.use(registradorSolicitudes.registrar);
 
-// Archivos estáticos
-app.use(express.static('publico'));
-app.use('/estilos', express.static('estilos'));
-app.use('/scripts', express.static('scripts'));
-app.use('/vistas', express.static('vistas'));
+// Serve React app static files
+app.use(express.static(path.join(__dirname, 'cliente', 'dist')));
 
-// ===== CONFIGURACIÓN DE SWAGGER =====
-const especificacionSwagger = swaggerJsdoc(configSwagger);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(especificacionSwagger));
-
-// ===== RUTAS =====
-
-// Ruta principal - Servir página de inicio
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'vistas', 'paginas', 'inicio.html'));
-});
-
-// Ruta de chat
-app.get('/chat', (req, res) => {
-    res.sendFile(path.join(__dirname, 'vistas', 'paginas', 'chat.html'));
-});
-
-// Ruta de ayuda
-app.get('/ayuda', (req, res) => {
-    res.sendFile(path.join(__dirname, 'vistas', 'paginas', 'ayuda.html'));
+// Fallback to React router for non-API routes
+app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) return res.status(404).json({ error: 'Ruta API no encontrada' });
+    res.sendFile(path.join(__dirname, 'cliente', 'dist', 'index.html'));
 });
 
 // API Routes
