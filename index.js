@@ -32,12 +32,6 @@ app.use(registradorSolicitudes.registrar);
 // Serve React app static files
 app.use(express.static(path.join(__dirname, 'cliente', 'dist')));
 
-// Fallback to React router for non-API routes
-app.get('*', (req, res) => {
-    if (req.path.startsWith('/api')) return res.status(404).json({ error: 'Ruta API no encontrada' });
-    res.sendFile(path.join(__dirname, 'cliente', 'dist', 'index.html'));
-});
-
 // API Routes
 const rutasCarrito = require('./servidor/rutas/rutas-carrito');
 app.use('/api/chat', rutasChat);
@@ -51,6 +45,12 @@ app.get('/api/salud', (req, res) => {
         timestamp: new Date().toISOString(),
         version: '1.0.0'
     });
+});
+
+// Fallback to React router for non-API routes
+app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) return res.status(404).json({ error: 'Ruta API no encontrada' });
+    res.sendFile(path.join(__dirname, 'cliente', 'dist', 'index.html'));
 });
 
 // ===== MANEJO DE ERRORES =====
