@@ -1,0 +1,1033 @@
+{
+  "settings": {
+    "languages": [
+      "es"
+    ],
+    "forceNER": true,
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "es"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "es": {
+        "settings": {
+          "locale": "es",
+          "trainByDomain": false,
+          "tag": "domain-manager-es",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "hol": {
+            "intent": "saludo",
+            "domain": "default"
+          },
+          "buen,dia": {
+            "intent": "saludo",
+            "domain": "default"
+          },
+          "buen,tard": {
+            "intent": "saludo",
+            "domain": "default"
+          },
+          "buen,noch": {
+            "intent": "saludo",
+            "domain": "default"
+          },
+          "que,tal": {
+            "intent": "saludo",
+            "domain": "default"
+          },
+          "adi": {
+            "intent": "despedida",
+            "domain": "default"
+          },
+          "hast,lueg": {
+            "intent": "despedida",
+            "domain": "default"
+          },
+          "nos,ver": {
+            "intent": "despedida",
+            "domain": "default"
+          },
+          "cha": {
+            "intent": "despedida",
+            "domain": "default"
+          },
+          "%producto%,busc,estar": {
+            "intent": "consulta_producto",
+            "domain": "default"
+          },
+          "%producto%,ten": {
+            "intent": "consulta_producto",
+            "domain": "default"
+          },
+          "%producto%,compr,quer": {
+            "intent": "consulta_producto",
+            "domain": "default"
+          },
+          "%producto%,muestram,sus": {
+            "intent": "consulta_producto",
+            "domain": "default"
+          },
+          "%producto%,que,ten": {
+            "intent": "consulta_producto",
+            "domain": "default"
+          },
+          "%producto%,cost,cuant": {
+            "intent": "consulta_precio",
+            "domain": "default"
+          },
+          "%producto%,prec,que,ten": {
+            "intent": "consulta_precio",
+            "domain": "default"
+          },
+          "%producto%,cual,de,el,ser,valor": {
+            "intent": "consulta_precio",
+            "domain": "default"
+          },
+          "%producto%,de,prec": {
+            "intent": "consulta_precio",
+            "domain": "default"
+          },
+          "agreg,al,carrit": {
+            "intent": "agregar_carrito",
+            "domain": "default"
+          },
+          "al,anad,carr": {
+            "intent": "agregar_carrito",
+            "domain": "default"
+          },
+          "compr,esto": {
+            "intent": "agregar_carrito",
+            "domain": "default"
+          },
+          "el,llev,me": {
+            "intent": "agregar_carrito",
+            "domain": "default"
+          },
+          "carrit,en,mi,ponl": {
+            "intent": "agregar_carrito",
+            "domain": "default"
+          },
+          "carrit,mi,ver": {
+            "intent": "ver_carrito",
+            "domain": "default"
+          },
+          "carrit,el,en,que,ten": {
+            "intent": "ver_carrito",
+            "domain": "default"
+          },
+          "carrit,mostr": {
+            "intent": "ver_carrito",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "saludo": "default",
+          "despedida": "default",
+          "consulta_producto": "default",
+          "consulta_precio": "default",
+          "agregar_carrito": "default",
+          "ver_carrito": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "hola",
+            "intent": "saludo"
+          },
+          {
+            "domain": "default",
+            "utterance": "buenos dias",
+            "intent": "saludo"
+          },
+          {
+            "domain": "default",
+            "utterance": "buenas tardes",
+            "intent": "saludo"
+          },
+          {
+            "domain": "default",
+            "utterance": "buenas noches",
+            "intent": "saludo"
+          },
+          {
+            "domain": "default",
+            "utterance": "que tal",
+            "intent": "saludo"
+          },
+          {
+            "domain": "default",
+            "utterance": "adios",
+            "intent": "despedida"
+          },
+          {
+            "domain": "default",
+            "utterance": "hasta luego",
+            "intent": "despedida"
+          },
+          {
+            "domain": "default",
+            "utterance": "nos vemos",
+            "intent": "despedida"
+          },
+          {
+            "domain": "default",
+            "utterance": "chao",
+            "intent": "despedida"
+          },
+          {
+            "domain": "default",
+            "utterance": "estoy buscando %producto%",
+            "intent": "consulta_producto"
+          },
+          {
+            "domain": "default",
+            "utterance": "tienen %producto%",
+            "intent": "consulta_producto"
+          },
+          {
+            "domain": "default",
+            "utterance": "quiero comprar %producto%",
+            "intent": "consulta_producto"
+          },
+          {
+            "domain": "default",
+            "utterance": "muestrame sus %producto%",
+            "intent": "consulta_producto"
+          },
+          {
+            "domain": "default",
+            "utterance": "que %producto% tienen",
+            "intent": "consulta_producto"
+          },
+          {
+            "domain": "default",
+            "utterance": "cuanto cuesta %producto%",
+            "intent": "consulta_precio"
+          },
+          {
+            "domain": "default",
+            "utterance": "que precio tiene %producto%",
+            "intent": "consulta_precio"
+          },
+          {
+            "domain": "default",
+            "utterance": "cual es el valor de %producto%",
+            "intent": "consulta_precio"
+          },
+          {
+            "domain": "default",
+            "utterance": "precio de %producto%",
+            "intent": "consulta_precio"
+          },
+          {
+            "domain": "default",
+            "utterance": "agregar al carrito",
+            "intent": "agregar_carrito"
+          },
+          {
+            "domain": "default",
+            "utterance": "añadir al carro",
+            "intent": "agregar_carrito"
+          },
+          {
+            "domain": "default",
+            "utterance": "comprar esto",
+            "intent": "agregar_carrito"
+          },
+          {
+            "domain": "default",
+            "utterance": "me lo llevo",
+            "intent": "agregar_carrito"
+          },
+          {
+            "domain": "default",
+            "utterance": "ponlo en mi carrito",
+            "intent": "agregar_carrito"
+          },
+          {
+            "domain": "default",
+            "utterance": "ver mi carrito",
+            "intent": "ver_carrito"
+          },
+          {
+            "domain": "default",
+            "utterance": "que tengo en el carrito",
+            "intent": "ver_carrito"
+          },
+          {
+            "domain": "default",
+            "utterance": "mostrar carrito",
+            "intent": "ver_carrito"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "es",
+              "tag": "nlu-es",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "hol": 1,
+              "buen": 1,
+              "dia": 1,
+              "tard": 1,
+              "noch": 1,
+              "que": 1,
+              "tal": 1,
+              "adi": 1,
+              "hast": 1,
+              "lueg": 1,
+              "nos": 1,
+              "ver": 1,
+              "cha": 1,
+              "estar": 1,
+              "busc": 1,
+              "%producto%": 1,
+              "ten": 1,
+              "quer": 1,
+              "compr": 1,
+              "muestram": 1,
+              "sus": 1,
+              "cuant": 1,
+              "cost": 1,
+              "prec": 1,
+              "cual": 1,
+              "ser": 1,
+              "el": 1,
+              "valor": 1,
+              "de": 1,
+              "agreg": 1,
+              "al": 1,
+              "carrit": 1,
+              "anad": 1,
+              "carr": 1,
+              "esto": 1,
+              "me": 1,
+              "llev": 1,
+              "ponl": 1,
+              "en": 1,
+              "mi": 1,
+              "mostr": 1
+            },
+            "intents": {
+              "saludo": 1,
+              "despedida": 1,
+              "consulta_producto": 1,
+              "consulta_precio": 1,
+              "agregar_carrito": 1,
+              "ver_carrito": 1
+            },
+            "intentFeatures": {
+              "saludo": {
+                "hol": 1,
+                "buen": 1,
+                "dia": 1,
+                "tard": 1,
+                "noch": 1,
+                "que": 1,
+                "tal": 1
+              },
+              "despedida": {
+                "adi": 1,
+                "hast": 1,
+                "lueg": 1,
+                "nos": 1,
+                "ver": 1,
+                "cha": 1
+              },
+              "consulta_producto": {
+                "estar": 1,
+                "busc": 1,
+                "%producto%": 1,
+                "ten": 1,
+                "quer": 1,
+                "compr": 1,
+                "muestram": 1,
+                "sus": 1,
+                "que": 1
+              },
+              "consulta_precio": {
+                "cuant": 1,
+                "cost": 1,
+                "%producto%": 1,
+                "que": 1,
+                "prec": 1,
+                "ten": 1,
+                "cual": 1,
+                "ser": 1,
+                "el": 1,
+                "valor": 1,
+                "de": 1
+              },
+              "agregar_carrito": {
+                "agreg": 1,
+                "al": 1,
+                "carrit": 1,
+                "anad": 1,
+                "carr": 1,
+                "compr": 1,
+                "esto": 1,
+                "me": 1,
+                "el": 1,
+                "llev": 1,
+                "ponl": 1,
+                "en": 1,
+                "mi": 1
+              },
+              "ver_carrito": {
+                "ver": 1,
+                "mi": 1,
+                "carrit": 1,
+                "que": 1,
+                "ten": 1,
+                "en": 1,
+                "el": 1,
+                "mostr": 1
+              }
+            },
+            "featuresToIntent": {
+              "hol": [
+                "saludo"
+              ],
+              "buen": [
+                "saludo"
+              ],
+              "dia": [
+                "saludo"
+              ],
+              "tard": [
+                "saludo"
+              ],
+              "noch": [
+                "saludo"
+              ],
+              "que": [
+                "saludo",
+                "consulta_producto",
+                "consulta_precio",
+                "ver_carrito"
+              ],
+              "tal": [
+                "saludo"
+              ],
+              "adi": [
+                "despedida"
+              ],
+              "hast": [
+                "despedida"
+              ],
+              "lueg": [
+                "despedida"
+              ],
+              "nos": [
+                "despedida"
+              ],
+              "ver": [
+                "despedida",
+                "ver_carrito"
+              ],
+              "cha": [
+                "despedida"
+              ],
+              "estar": [
+                "consulta_producto"
+              ],
+              "busc": [
+                "consulta_producto"
+              ],
+              "%producto%": [
+                "consulta_producto",
+                "consulta_precio"
+              ],
+              "ten": [
+                "consulta_producto",
+                "consulta_precio",
+                "ver_carrito"
+              ],
+              "quer": [
+                "consulta_producto"
+              ],
+              "compr": [
+                "consulta_producto",
+                "agregar_carrito"
+              ],
+              "muestram": [
+                "consulta_producto"
+              ],
+              "sus": [
+                "consulta_producto"
+              ],
+              "cuant": [
+                "consulta_precio"
+              ],
+              "cost": [
+                "consulta_precio"
+              ],
+              "prec": [
+                "consulta_precio"
+              ],
+              "cual": [
+                "consulta_precio"
+              ],
+              "ser": [
+                "consulta_precio"
+              ],
+              "el": [
+                "consulta_precio",
+                "agregar_carrito",
+                "ver_carrito"
+              ],
+              "valor": [
+                "consulta_precio"
+              ],
+              "de": [
+                "consulta_precio"
+              ],
+              "agreg": [
+                "agregar_carrito"
+              ],
+              "al": [
+                "agregar_carrito"
+              ],
+              "carrit": [
+                "agregar_carrito",
+                "ver_carrito"
+              ],
+              "anad": [
+                "agregar_carrito"
+              ],
+              "carr": [
+                "agregar_carrito"
+              ],
+              "esto": [
+                "agregar_carrito"
+              ],
+              "me": [
+                "agregar_carrito"
+              ],
+              "llev": [
+                "agregar_carrito"
+              ],
+              "ponl": [
+                "agregar_carrito"
+              ],
+              "en": [
+                "agregar_carrito",
+                "ver_carrito"
+              ],
+              "mi": [
+                "agregar_carrito",
+                "ver_carrito"
+              ],
+              "mostr": [
+                "ver_carrito"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "es",
+                "tag": "nlu-es",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "hol",
+                "buen",
+                "dia",
+                "tard",
+                "noch",
+                "que",
+                "tal",
+                "adi",
+                "hast",
+                "lueg",
+                "nos",
+                "ver",
+                "cha",
+                "estar",
+                "busc",
+                "%producto%",
+                "ten",
+                "quer",
+                "compr",
+                "muestram",
+                "sus",
+                "cuant",
+                "cost",
+                "prec",
+                "cual",
+                "ser",
+                "el",
+                "valor",
+                "de",
+                "agreg",
+                "al",
+                "carrit",
+                "anad",
+                "carr",
+                "esto",
+                "me",
+                "llev",
+                "ponl",
+                "en",
+                "mi",
+                "mostr"
+              ],
+              "intents": [
+                "saludo",
+                "despedida",
+                "consulta_producto",
+                "consulta_precio",
+                "agregar_carrito",
+                "ver_carrito"
+              ],
+              "perceptrons": [
+                [
+                  10.980563163757324,
+                  8.23980712890625,
+                  2.7468533515930176,
+                  2.746638298034668,
+                  2.746321678161621,
+                  4.0087409019470215,
+                  6.977289199829102,
+                  -3.297105550765991,
+                  -1.6496095657348633,
+                  -1.6496095657348633,
+                  -1.5626046657562256,
+                  -1.7366127967834473,
+                  -3.296010732650757,
+                  -0.3172503411769867,
+                  -0.3172503411769867,
+                  -4.08431339263916,
+                  -3.223287343978882,
+                  -0.2067161351442337,
+                  -1.7833811044692993,
+                  -0.27271974086761475,
+                  -0.27271974086761475,
+                  -0.2002353072166443,
+                  -0.2002353072166443,
+                  -0.698716402053833,
+                  -0.05415460094809532,
+                  -0.05415460094809532,
+                  -1.4494234323501587,
+                  -0.05415460094809532,
+                  -0.13161571323871613,
+                  -0.3881121277809143,
+                  -1.3931154012680054,
+                  -2.3166451454162598,
+                  -0.9529518485069275,
+                  -0.9529518485069275,
+                  -1.5155537128448486,
+                  -0.9247909784317017,
+                  -0.9247909784317017,
+                  -0.2531583309173584,
+                  -0.7182676196098328,
+                  -0.43987953662872314,
+                  -0.9822692275047302,
+                  3.2990569279059
+                ],
+                [
+                  -4.399337291717529,
+                  -3.3065338134765625,
+                  -1.108181357383728,
+                  -1.0993934869766235,
+                  -1.0987863540649414,
+                  -2.3434219360351562,
+                  -2.061880111694336,
+                  9.877378463745117,
+                  4.940097808837891,
+                  4.940097808837891,
+                  6.469017505645752,
+                  3.4111826419830322,
+                  9.87603759765625,
+                  -0.5219764113426208,
+                  -0.5219764113426208,
+                  -3.40358304977417,
+                  -1.0023261308670044,
+                  -0.2891329228878021,
+                  -2.3756091594696045,
+                  -0.502677321434021,
+                  -0.502677321434021,
+                  -0.5022493600845337,
+                  -0.5022493600845337,
+                  -0.47070667147636414,
+                  -0.1079537570476532,
+                  -0.1079537570476532,
+                  -1.5833215713500977,
+                  -0.1079537570476532,
+                  -0.5333124399185181,
+                  -0.4464401304721832,
+                  -1.8104274272918701,
+                  -4.440243721008301,
+                  -1.2977626323699951,
+                  -1.2977626323699951,
+                  -2.030287981033325,
+                  -1.4113081693649292,
+                  -1.4113081693649292,
+                  -0.262681245803833,
+                  -0.29345938563346863,
+                  -3.3774895668029785,
+                  -0.4978685975074768,
+                  4.405778908817829
+                ],
+                [
+                  -0.6134555339813232,
+                  -0.6355888843536377,
+                  -0.21592830121517181,
+                  -0.20377714931964874,
+                  -0.18337583541870117,
+                  -0.6801063418388367,
+                  -0.11010847240686417,
+                  -0.607185423374176,
+                  -0.3492259681224823,
+                  -0.3492259681224823,
+                  -0.3006519675254822,
+                  -0.3969743251800537,
+                  -0.6024827361106873,
+                  2.6333634853363037,
+                  2.6333634853363037,
+                  8.4959077835083,
+                  5.523706912994385,
+                  3.766716718673706,
+                  1.5219630002975464,
+                  2.647127389907837,
+                  2.647127389907837,
+                  -4.521774768829346,
+                  -4.521774768829346,
+                  -13.674166679382324,
+                  -1.3946748971939087,
+                  -1.3946748971939087,
+                  -2.568418502807617,
+                  -1.3946748971939087,
+                  -2.638979911804199,
+                  -0.13613852858543396,
+                  -0.4373868703842163,
+                  -1.5703599452972412,
+                  -0.2673245370388031,
+                  -0.2673245370388031,
+                  -2.243288516998291,
+                  -0.06113851070404053,
+                  -0.06113851070404053,
+                  -0.07328005135059357,
+                  -1.1923831701278687,
+                  -0.18573594093322754,
+                  -0.10622470825910568,
+                  0.51836827991803
+                ],
+                [
+                  -0.20390287041664124,
+                  -0.4381934106349945,
+                  -0.13468001782894135,
+                  -0.12072594463825226,
+                  -0.10683182626962662,
+                  1.9021422863006592,
+                  -0.9460017085075378,
+                  -0.18156570196151733,
+                  -0.14670486748218536,
+                  -0.14670486748218536,
+                  -0.12099036574363708,
+                  -0.23351718485355377,
+                  -0.16458867490291595,
+                  -1.7533059120178223,
+                  -1.7533059120178223,
+                  1.8834751844406128,
+                  -1.7765235900878906,
+                  -1.4981322288513184,
+                  -1.7198246717453003,
+                  -1.562829852104187,
+                  -1.562829852104187,
+                  6.829086780548096,
+                  6.829086780548096,
+                  12.97372817993164,
+                  3.4372060298919678,
+                  3.4372060298919678,
+                  2.2402331829071045,
+                  3.4372060298919678,
+                  1.0536919832229614,
+                  -0.12943845987319946,
+                  -0.3693481385707855,
+                  -1.091475248336792,
+                  -0.18180899322032928,
+                  -0.18180899322032928,
+                  -0.17967639863491058,
+                  -0.4829113483428955,
+                  -0.4829113483428955,
+                  -0.08959390968084335,
+                  -0.6892402172088623,
+                  -0.20506705343723297,
+                  -0.053393639624118805,
+                  -1.3020329151854657
+                ],
+                [
+                  -1.8238180875778198,
+                  -1.7003229856491089,
+                  -0.5930852890014648,
+                  -0.5516912937164307,
+                  -0.4996950030326843,
+                  -3.7647311687469482,
+                  -0.29547131061553955,
+                  -1.8218752145767212,
+                  -0.9845336675643921,
+                  -0.9845336675643921,
+                  -0.26897361874580383,
+                  -4.686527729034424,
+                  -1.8215818405151367,
+                  -0.22879737615585327,
+                  -0.22879737615585327,
+                  -3.9037036895751953,
+                  -3.537255048751831,
+                  -2.7665584087371826,
+                  4.848538398742676,
+                  -0.12751086056232452,
+                  -0.12751086056232452,
+                  -0.12211810052394867,
+                  -0.12211810052394867,
+                  -0.03791580721735954,
+                  -0.3236406147480011,
+                  -0.3236406147480011,
+                  1.6477736234664917,
+                  -0.3236406147480011,
+                  -0.385490745306015,
+                  4.54705286026001,
+                  7.186003684997559,
+                  0.7307359576225281,
+                  2.638944387435913,
+                  2.638944387435913,
+                  7.6150994300842285,
+                  5.408010005950928,
+                  5.408010005950928,
+                  6.4971394538879395,
+                  3.101677894592285,
+                  2.134108066558838,
+                  -2.554879903793335,
+                  1.8218563939663335
+                ],
+                [
+                  -0.33808043599128723,
+                  -0.596768319606781,
+                  -0.17395661771297455,
+                  -0.1561794877052307,
+                  -0.15989670157432556,
+                  1.8294308185577393,
+                  -1.0225180387496948,
+                  -0.2819836139678955,
+                  -0.22419410943984985,
+                  -0.22419410943984985,
+                  -3.797072410583496,
+                  4.9308648109436035,
+                  -0.23609669506549835,
+                  -0.06181137636303902,
+                  -0.06181137636303902,
+                  -3.2538504600524902,
+                  2.549941301345825,
+                  -0.04054565727710724,
+                  -0.12660792469978333,
+                  -0.03452480584383011,
+                  -0.03452480584383011,
+                  -0.009793455712497234,
+                  -0.009793455712497234,
+                  -0.6357167363166809,
+                  -0.1438995599746704,
+                  -0.1438995599746704,
+                  3.87292218208313,
+                  -0.1438995599746704,
+                  -0.1438995599746704,
+                  -3.9741122722625732,
+                  -4.007925033569336,
+                  9.106171607971191,
+                  -0.02293621003627777,
+                  -0.02293621003627777,
+                  -0.07073170691728592,
+                  -1.3747583627700806,
+                  -1.3747583627700806,
+                  -7.3726348876953125,
+                  -1.9545642137527466,
+                  1.3553112745285034,
+                  6.305779933929443,
+                  -1.122300075584121
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "es",
+        "hola"
+      ],
+      [
+        "es",
+        "buenos dias"
+      ],
+      [
+        "es",
+        "buenas tardes"
+      ],
+      [
+        "es",
+        "buenas noches"
+      ],
+      [
+        "es",
+        "que tal"
+      ],
+      [
+        "es",
+        "adios"
+      ],
+      [
+        "es",
+        "hasta luego"
+      ],
+      [
+        "es",
+        "nos vemos"
+      ],
+      [
+        "es",
+        "chao"
+      ],
+      [
+        "es",
+        "estoy buscando %producto%"
+      ],
+      [
+        "es",
+        "tienen %producto%"
+      ],
+      [
+        "es",
+        "quiero comprar %producto%"
+      ],
+      [
+        "es",
+        "muestrame sus %producto%"
+      ],
+      [
+        "es",
+        "que %producto% tienen"
+      ],
+      [
+        "es",
+        "cuanto cuesta %producto%"
+      ],
+      [
+        "es",
+        "que precio tiene %producto%"
+      ],
+      [
+        "es",
+        "cual es el valor de %producto%"
+      ],
+      [
+        "es",
+        "precio de %producto%"
+      ],
+      [
+        "es",
+        "agregar al carrito"
+      ],
+      [
+        "es",
+        "añadir al carro"
+      ],
+      [
+        "es",
+        "comprar esto"
+      ],
+      [
+        "es",
+        "me lo llevo"
+      ],
+      [
+        "es",
+        "ponlo en mi carrito"
+      ],
+      [
+        "es",
+        "ver mi carrito"
+      ],
+      [
+        "es",
+        "que tengo en el carrito"
+      ],
+      [
+        "es",
+        "mostrar carrito"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {}
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {
+    "consulta_producto": {
+      "producto": {
+        "intent": "consulta_producto",
+        "entity": "producto",
+        "mandatory": false,
+        "locales": {}
+      }
+    },
+    "consulta_precio": {
+      "producto": {
+        "intent": "consulta_precio",
+        "entity": "producto",
+        "mandatory": false,
+        "locales": {}
+      }
+    }
+  }
+}
