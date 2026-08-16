@@ -8,15 +8,23 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["chatbot", "ecommerce", "assistant", "retail"],
+  "keywords": [
+    "chatbot",
+    "ecommerce",
+    "assistant",
+    "retail"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.1",
     "express": "^5.2.1",
+    "node-nlp": "^5.0.0-alpha.5",
+    "sqlite3": "^6.0.1",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^14.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
