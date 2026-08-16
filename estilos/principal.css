@@ -1,30 +1,49 @@
-/* Variables globales de la aplicación */
+/* Modern UI Design System for ShopBot */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
-    --color-primario: #007bff;
-    --color-secundario: #6c757d;
-    --color-exito: #28a745;
-    --color-peligro: #dc3545;
-    --color-advertencia: #ffc107;
-    --color-info: #17a2b8;
+    /* HSL Palette */
+    --h-brand: 220;
+    --s-brand: 90%;
+    --l-brand: 56%;
+
+    /* Brand Colors */
+    --color-primario: hsl(var(--h-brand), var(--s-brand), var(--l-brand));
+    --color-primario-hover: hsl(var(--h-brand), var(--s-brand), 46%);
+    --color-primario-suave: hsl(var(--h-brand), 80%, 96%);
+
+    /* Neutral Colors */
+    --color-fondo: hsl(0, 0%, 98%);
+    --color-superficie: hsl(0, 0%, 100%);
+    --color-borde: hsl(220, 13%, 91%);
     
-    --color-texto-principal: #212529;
-    --color-texto-secundario: #6c757d;
-    --color-fondo: #f8f9fa;
-    --color-blanco: #ffffff;
+    /* Text Colors */
+    --color-texto-principal: hsl(220, 39%, 11%);
+    --color-texto-secundario: hsl(215, 16%, 47%);
+    --color-blanco: hsl(0, 0%, 100%);
+
+    /* Utility */
+    --color-exito: hsl(142, 71%, 45%);
+    --color-exito-fondo: hsl(142, 71%, 95%);
+    --color-peligro: hsl(348, 83%, 47%);
+
+    /* Typography */
+    --fuente-principal: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     
-    --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --fuente-codigo: 'Courier New', monospace;
-    
-    --espaciado-xs: 4px;
-    --espaciado-sm: 8px;
-    --espaciado-md: 16px;
-    --espaciado-lg: 24px;
-    --espaciado-xl: 32px;
-    
-    --radio-borde: 8px;
-    --sombra-ligera: 0 2px 4px rgba(0,0,0,0.1);
-    --sombra-media: 0 4px 8px rgba(0,0,0,0.15);
-    --sombra-fuerte: 0 8px 16px rgba(0,0,0,0.2);
+    /* Spacing */
+    --espaciado-xs: 0.25rem;
+    --espaciado-sm: 0.5rem;
+    --espaciado-md: 1rem;
+    --espaciado-lg: 1.5rem;
+    --espaciado-xl: 2.5rem;
+
+    /* Aesthetics */
+    --radio-borde: 12px;
+    --radio-borde-lg: 20px;
+    --sombra-ligera: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --sombra-media: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --sombra-flotante: 0 20px 40px rgba(0, 0, 0, 0.12);
+    --transicion-suave: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 * {
@@ -37,7 +56,9 @@ body {
     font-family: var(--fuente-principal);
     color: var(--color-texto-principal);
     background-color: var(--color-fondo);
-    line-height: 1.6;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 #aplicacion {
@@ -48,5 +69,44 @@ body {
 
 #contenido-principal {
     flex: 1;
-    padding: var(--espaciado-lg);
+    padding: var(--espaciado-xl) var(--espaciado-md);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Base Components */
+.boton {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: var(--radio-borde);
+    padding: var(--espaciado-sm) var(--espaciado-md);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transicion-suave);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.boton:hover {
+    background-color: var(--color-primario-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--sombra-ligera);
+}
+
+.tarjeta {
+    background: var(--color-superficie);
+    border-radius: var(--radio-borde-lg);
+    box-shadow: var(--sombra-ligera);
+    border: 1px solid var(--color-borde);
+    transition: var(--transicion-suave);
+}
+
+.tarjeta:hover {
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
 }

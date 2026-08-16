@@ -2,6 +2,27 @@
 class ServicioAPI {
     constructor() {
         this.urlBase = '/api';
+        this.sessionId = this.obtenerOSetearSessionId();
+    }
+
+    obtenerOSetearSessionId() {
+        let id = localStorage.getItem('shopbot_session_id');
+        if (!id) {
+            // Generar UUID v4 simple para el cliente
+            id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            localStorage.setItem('shopbot_session_id', id);
+        }
+        return id;
+    }
+
+    getHeaders() {
+        return {
+            'Content-Type': 'application/json',
+            'x-session-id': this.sessionId
+        };
     }
 
     /**
@@ -11,7 +32,9 @@ class ServicioAPI {
      */
     async obtener(endpoint) {
         try {
-            const respuesta = await fetch(`${this.urlBase}${endpoint}`);
+            const respuesta = await fetch(`${this.urlBase}${endpoint}`, {
+                headers: this.getHeaders()
+            });
             if (!respuesta.ok) {
                 throw new Error(`Error HTTP: ${respuesta.status}`);
             }
@@ -32,9 +55,7 @@ class ServicioAPI {
         try {
             const respuesta = await fetch(`${this.urlBase}${endpoint}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: this.getHeaders(),
                 body: JSON.stringify(datos)
             });
             
@@ -59,9 +80,7 @@ class ServicioAPI {
         try {
             const respuesta = await fetch(`${this.urlBase}${endpoint}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: this.getHeaders(),
                 body: JSON.stringify(datos)
             });
             
@@ -84,7 +103,8 @@ class ServicioAPI {
     async eliminar(endpoint) {
         try {
             const respuesta = await fetch(`${this.urlBase}${endpoint}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: this.getHeaders()
             });
             
             if (!respuesta.ok) {
