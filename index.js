@@ -57,8 +57,10 @@ app.get('/ayuda', (req, res) => {
 });
 
 // API Routes
+const rutasCarrito = require('./servidor/rutas/rutas-carrito');
 app.use('/api/chat', rutasChat);
 app.use('/api/productos', rutasProductos);
+app.use('/api/carrito', rutasCarrito);
 
 // Ruta de salud del servidor
 app.get('/api/salud', (req, res) => {
