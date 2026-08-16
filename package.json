@@ -21,6 +21,8 @@
     "body-parser": "^2.2.1",
     "express": "^5.2.1",
     "node-nlp": "^5.0.0-alpha.5",
+    "sequelize": "^6.37.8",
+    "sequelize-cli": "^6.6.5",
     "sqlite3": "^6.0.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
