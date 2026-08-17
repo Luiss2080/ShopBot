@@ -22,6 +22,7 @@
   "dependencies": {
     "body-parser": "^2.2.1",
     "express": "^5.2.1",
+    "mysql2": "^3.23.3",
     "node-nlp": "^5.0.0-alpha.5",
     "sequelize": "^6.37.8",
     "sequelize-cli": "^6.6.5",

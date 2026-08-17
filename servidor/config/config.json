@@ -1,14 +1,23 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "./shopbot-dev.sqlite"
+    "username": "root",
+    "password": "",
+    "database": "shopbot_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
-    "dialect": "sqlite",
-    "storage": ":memory:"
+    "username": "root",
+    "password": "",
+    "database": "shopbot_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "production": {
-    "dialect": "sqlite",
-    "storage": "./shopbot-prod.sqlite"
+    "username": "root",
+    "password": "",
+    "database": "shopbot_prod",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }

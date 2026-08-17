@@ -51,7 +51,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-background dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-brand-500 selection:text-white transition-colors duration-300">
+      <div className="min-h-screen flex flex-col font-sans">
         <Header 
           toggleCart={() => setIsCartOpen(true)} 
           cartCount={totalItems} 
