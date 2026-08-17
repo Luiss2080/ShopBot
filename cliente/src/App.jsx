@@ -53,7 +53,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col font-sans bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      <div className="min-h-screen flex flex-col font-sans bg-slate-50 text-slate-900 transition-colors duration-300">
         <Header 
           toggleCart={() => setIsCartOpen(true)} 
           cartCount={totalItems} 
@@ -83,7 +83,7 @@ function App() {
         <Toaster 
           position="top-center" 
           toastOptions={{
-            className: 'text-sm font-bold rounded-2xl shadow-floating border border-slate-100 dark:border-slate-800 dark:bg-slate-800 dark:text-white',
+            className: 'text-sm font-bold rounded-2xl shadow-floating border border-slate-100',
             duration: 3000,
           }} 
         />
