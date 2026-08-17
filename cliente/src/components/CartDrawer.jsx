@@ -3,7 +3,11 @@ import { X, Trash2, ShoppingBag } from 'lucide-react';
 import { cartAPI } from '../services/api';
 import toast from 'react-hot-toast';
 
+import { useNavigate } from 'react-router-dom';
+
 export default function CartDrawer({ isOpen, onClose, cart, refreshCart }) {
+  const navigate = useNavigate();
+
   const handleRemove = async (itemId) => {
     try {
       await cartAPI.removeItem(itemId);
@@ -13,6 +17,11 @@ export default function CartDrawer({ isOpen, onClose, cart, refreshCart }) {
       console.error(error);
       toast.error('Ocurrió un error al eliminar');
     }
+  };
+
+  const handleCheckout = () => {
+    onClose();
+    navigate('/checkout');
   };
 
   return (
@@ -98,7 +107,10 @@ export default function CartDrawer({ isOpen, onClose, cart, refreshCart }) {
                   <span className="text-slate-500 font-medium">Total a pagar</span>
                   <span className="text-3xl font-black text-slate-900">${(cart.total || 0).toFixed(2)}</span>
                 </div>
-                <button className="btn-primary w-full py-4 text-lg font-bold flex items-center justify-center gap-2" onClick={() => toast.success('¡Compra simulada con éxito!')}>
+                <button 
+                  className="bg-brand-500 hover:bg-brand-600 w-full py-4 rounded-xl text-white text-lg font-bold flex items-center justify-center gap-2 transition-colors shadow-md hover:shadow-lg" 
+                  onClick={handleCheckout}
+                >
                   Proceder al Pago
                 </button>
               </div>
