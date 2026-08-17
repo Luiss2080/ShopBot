@@ -48,7 +48,7 @@ app.get('/api/salud', (req, res) => {
 });
 
 // Fallback to React router for non-API routes
-app.get('*', (req, res) => {
+app.use((req, res, next) => {
     if (req.path.startsWith('/api')) return res.status(404).json({ error: 'Ruta API no encontrada' });
     res.sendFile(path.join(__dirname, 'cliente', 'dist', 'index.html'));
 });

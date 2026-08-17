@@ -9,7 +9,12 @@ export default function ProductList({ onAddToCart }) {
   useEffect(() => {
     productAPI.getAll()
       .then(data => {
-        setProductos(data);
+        if (Array.isArray(data)) {
+          setProductos(data);
+        } else {
+          console.error('La respuesta no es un arreglo:', data);
+          setProductos([]);
+        }
         setLoading(false);
       })
       .catch(err => {
