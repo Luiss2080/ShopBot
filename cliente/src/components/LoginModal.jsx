@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Lock, Github, ArrowRight } from 'lucide-react';
+import { X, Mail, Lock, Code, ArrowRight } from 'lucide-react';
 
 export default function LoginModal({ isOpen, onClose }) {
   const [tab, setTab] = useState('login'); // 'login' or 'register'
@@ -102,7 +102,7 @@ export default function LoginModal({ isOpen, onClose }) {
                   Google
                 </button>
                 <button className="flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-700 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                  <Github size={20} />
+                  <Code size={20} />
                   GitHub
                 </button>
               </div>
