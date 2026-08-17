@@ -1,107 +1,90 @@
-# ShopBot V3 - E-Commerce Asistido por IA 🚀
+# ShopBot V3 Ultra - E-Commerce Asistido por IA 🚀
 
-![ShopBot Banner](https://via.placeholder.com/1200x400/2563eb/ffffff?text=ShopBot+V3+-+React+%2B+Node.js)
+![ShopBot Banner](https://via.placeholder.com/1200x400/2563eb/ffffff?text=ShopBot+V3+Ultra+-+E-Commerce+%2B+AI)
 
-ShopBot V3 es una plataforma de comercio electrónico moderna, impulsada por Inteligencia Artificial y construida bajo una estricta arquitectura **MVC** en el backend y **React (SPA)** en el frontend.
-
-Diseñada con **Tailwind CSS**, la nueva interfaz ofrece una experiencia premium e intuitiva, permitiendo a los usuarios navegar por productos, manejar su carrito y hablar con un asistente virtual de IA (NLP) en tiempo real.
+ShopBot V3 Ultra es la evolución definitiva de nuestra plataforma de comercio electrónico. Construida sobre una arquitectura robusta **MVC** en el backend y una **SPA** en React, esta versión incluye características de nivel de producción, diseño premium adaptativo (Dark Mode) y un asistente de Inteligencia Artificial integrado.
 
 ---
 
-## ✨ Novedades en la Versión 3
+## ✨ Características Principales (V3 Ultra)
 
-- **Frontend Moderno (React + Vite):** Todo el sistema visual ahora es una Single Page Application (SPA), garantizando tiempos de carga instantáneos sin recargar la página.
-- **Diseño Premium con Tailwind CSS v3:** Interfaz moderna, tarjetas de producto con efectos de elevación, chat flotante y notificaciones elegantes (Toasts).
-- **Arquitectura Backend MVC:** Código estructurado profesionalmente separando Modelos, Vistas (React) y Controladores.
-- **Base de Datos ORM (Sequelize):** Manejo robusto de la base de datos (SQLite) mediante migraciones y seeders.
-- **Asistente NLP Integrado:** Chatbot inteligente capaz de entender el lenguaje natural e interactuar con el carrito.
+- **Arquitectura Multi-Página:** Enrutamiento real con `React Router` (Inicio, Catálogo, Ofertas, Acerca de, Checkout).
+- **Animaciones Nativas (Framer Motion):** Transiciones de página sin cortes, modales de vista rápida y efectos de Hover premium en todo el sitio.
+- **Dark Mode (Modo Oscuro):** Un interruptor interactivo que cambia completamente el estilo de la plataforma al instante usando Tailwind CSS.
+- **Flujo de Checkout Realista:** Proceso animado de 3 pasos (Envío -> Pago -> Éxito) que finaliza vaciando la orden en la Base de Datos.
+- **IA Conversacional:** El ChatBot flotante comprende tus intenciones (vía `Node-NLP`) y puede añadir productos a tu carrito por ti.
+- **Imágenes Reales en Alta Calidad:** Seeder conectado a URLs dinámicas de Unsplash para darle vida al catálogo.
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Stack Tecnológico
 
 ### Frontend (Cliente)
-- **React 18** (vía Vite)
-- **Tailwind CSS v3** para estilizado utilitario.
-- **Axios** para consumo de API REST.
-- **Lucide React** para iconografía moderna.
-- **React Hot Toast** para notificaciones.
+- **React 18** (Vite)
+- **React Router DOM v6** (Enrutamiento)
+- **Tailwind CSS v3** (Estilos y Dark Mode)
+- **Framer Motion** (Animaciones de UI complejas)
+- **Lucide React** (Iconografía ligera y escalable)
+- **React Hot Toast** (Notificaciones modernas)
 
 ### Backend (Servidor)
-- **Node.js** con **Express**.
-- **Sequelize ORM** (con SQLite para fácil portabilidad).
-- **Node-NLP** para procesamiento de lenguaje natural.
-- **Concurrently** para orquestación de servicios en una sola terminal.
+- **Node.js + Express 5** (API RESTFUL y Catch-all routing)
+- **Sequelize ORM** (Modelado de datos)
+- **SQLite** (Base de datos persistente)
+- **Node-NLP** (Motor de procesamiento de lenguaje natural)
 
 ---
 
-## 🚀 Instalación y Ejecución
+## 🚀 Instalación y Ejecución Rápida
 
-Olvídate de abrir múltiples terminales. Hemos integrado todo en un solo flujo.
+Hemos creado un `launcher` automatizado para que no tengas que preocuparte por múltiples terminales.
 
-### Prerrequisitos
-- Node.js (v18+)
-- NPM o Yarn
-
-### Paso 1: Clonar y Ejecutar
-Simplemente ejecuta el script de inicio mágico que instalará todas las dependencias (si faltan) y arrancará tanto la API como el cliente React en la misma consola.
-
-**En la terminal integrada de VS Code, ejecuta:**
+**Abre la terminal de VS Code y ejecuta:**
 ```bash
 ./scripts/start.bat
 ```
-*(O puedes correr manualmente `npm install` y luego `npm run dev:all` en la raíz del proyecto).*
 
-### Paso 2: Navegar
-- **Frontend (App):** Abre tu navegador en `http://localhost:5173`
-- **Backend (API):** Operando en `http://localhost:3000/api`
+*(O puedes correr manualmente `npm install` en la raíz, `npm install` en `/cliente` y luego `npm run dev:all`)*.
+
+### Rutas Locales
+- **Aplicación (React):** `http://localhost:5173`
+- **Servidor API:** `http://localhost:3000/api`
 
 ---
 
-## 📂 Estructura del Proyecto
+## 📂 Estructura del Frontend (`/cliente`)
 
-El proyecto está organizado de manera modular, manteniendo archivos pequeños y enfocados:
+El Frontend fue rediseñado bajo estándares de escalabilidad:
 
 ```text
-ShopBot/
-├── cliente/                  # ⚛️ Frontend React (Vite)
-│   ├── src/
-│   │   ├── components/       # Componentes de UI modulares (< 200 líneas)
-│   │   │   ├── Header.jsx
-│   │   │   ├── ProductList.jsx
-│   │   │   ├── CartDrawer.jsx
-│   │   │   └── ChatWidget.jsx
-│   │   ├── services/         # Consumo de API (api.js)
-│   │   ├── App.jsx           # Layout principal
-│   │   └── index.css         # Configuración Tailwind
-│   └── tailwind.config.js    # Paleta de colores "brand" y utilidades
-│
-├── servidor/                 # ⚙️ Backend Node.js
-│   ├── controladores/        # Lógica de negocio (MVC)
-│   ├── models/               # Modelos de Sequelize (Producto, Carrito)
-│   ├── migrations/           # Historial de versiones de BD
-│   ├── seeders/              # Datos iniciales (Demo productos)
-│   ├── rutas/                # Endpoints API REST (/api/*)
-│   └── utilidades/           # NLP y configuraciones globales
-│
-├── scripts/                  # 🚀 Utilidades automatizadas
-│   └── start.bat             # Launcher unificado
-│
-├── shopbot-dev.sqlite        # 🗄️ Base de datos local
-└── index.js                  # Punto de entrada Express
+cliente/src/
+├── components/
+│   ├── layout/            # Header (con Dark Mode Toggle) y Mega-Footer
+│   ├── CartDrawer.jsx     # Slide-over del carrito con Framer Motion
+│   ├── ChatWidget.jsx     # Chat de IA con animaciones de escritura
+│   ├── ProductCard.jsx    # Tarjeta de producto con Hover reveal
+│   ├── ProductList.jsx    # Grid con filtros dinámicos
+│   └── QuickViewModal.jsx # Modal expansivo (Glassmorphism)
+├── pages/
+│   ├── Home.jsx           # Landing page (Hero, Features, Newsletter)
+│   ├── Catalog.jsx        # Catálogo Full-screen
+│   ├── Offers.jsx         # Promociones con banner especial
+│   ├── About.jsx          # Sección corporativa
+│   └── Checkout.jsx       # Proceso de compra (3 pasos)
+├── services/              # Llamadas Axios al backend
+├── App.jsx                # Router Provider y <AnimatePresence>
+└── main.jsx               # Punto de anclaje de React
 ```
 
 ---
 
-## 🤖 El Asistente IA (ShopBot)
+## 🤖 Interactuando con la IA
 
-El ChatWidget flotante (esquina inferior derecha) se conecta al motor `Node-NLP` del servidor. 
-- **Saluda:** *"Hola", "Buenos días"*
-- **Pide ayuda:** *"¿Qué puedes hacer?", "Ayuda"*
-- **Interactúa con el carrito:** Puedes decirle "Quiero agregar esto al carrito" y el bot disparará la acción en tu interfaz conectada a React.
+Prueba abrir el chat flotante en la esquina inferior derecha y dile al bot:
+> *"Hola, quiero comprar algo"* o *"Agregar producto al carrito"*.
+
+El bot disparará un evento global en React que sincronizará la interfaz con el backend de manera inmediata.
 
 ---
 
-## 📝 Licencia
-
-Este proyecto fue desarrollado bajo estrictos lineamientos de calidad para demostrar la integración de IA clásica con arquitecturas web de vanguardia.
+**ShopBot Inc. © 2026** - *El Futuro del Comercio.*
