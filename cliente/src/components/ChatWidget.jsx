@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, User, MessageCircle, X } from 'lucide-react';
 import { chatAPI } from '../services/api';
 import toast from 'react-hot-toast';
@@ -35,10 +36,9 @@ export default function ChatWidget({ onAddToCart }) {
       setIsTyping(false);
       setMessages(prev => [...prev, { id: Date.now().toString(), role: 'bot', text: res.respuesta }]);
       
-      // Lógica simple de carrito vía NLP
       if (res.respuesta.toLowerCase().includes('carrito')) {
         onAddToCart();
-        toast.success("Carrito actualizado desde el chat");
+        toast.success("Carrito actualizado desde el chat", { icon: '🤖' });
       }
     } catch (error) {
       console.error(error);
@@ -49,79 +49,111 @@ export default function ChatWidget({ onAddToCart }) {
 
   return (
     <>
-      {/* Botón flotante para abrir chat */}
-      {!isOpen && (
-        <button 
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 bg-brand-500 text-white p-4 rounded-full shadow-floating hover:bg-brand-600 transition-all hover:scale-110 z-50"
-        >
-          <MessageCircle size={28} />
-        </button>
-      )}
+      {/* Botón Flotante */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button 
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsOpen(true)}
+            className="fixed bottom-6 right-6 bg-brand-500 text-white p-4 rounded-full shadow-floating z-40 flex items-center justify-center"
+          >
+            <MessageCircle size={28} />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Ventana de Chat */}
-      <div 
-        className={`fixed bottom-6 right-6 w-[360px] h-[550px] bg-surface rounded-2xl shadow-floating border border-slate-100 flex flex-col overflow-hidden z-50 transition-all duration-300 origin-bottom-right ${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}`}
-      >
-        <div className="bg-gradient-to-r from-brand-600 to-brand-500 text-white p-4 flex justify-between items-center shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="bg-white/20 p-2 rounded-lg">
-              <Bot size={20} />
-            </div>
-            <div>
-              <h3 className="font-bold text-sm">Asistente ShopBot</h3>
-              <p className="text-brand-100 text-xs">En línea</p>
-            </div>
-          </div>
-          <button onClick={() => setIsOpen(false)} className="text-brand-100 hover:text-white transition-colors">
-            <X size={20} />
-          </button>
-        </div>
-        
-        <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-slate-50">
-          {messages.map(msg => (
-            <div key={msg.id} className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'self-end flex-row-reverse' : 'self-start'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${msg.role === 'user' ? 'bg-slate-200 text-slate-500' : 'bg-brand-100 text-brand-600'}`}>
-                {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
-              </div>
-              <div className={`p-3 rounded-2xl text-sm ${msg.role === 'user' ? 'bg-brand-500 text-white rounded-tr-sm' : 'bg-white border border-slate-100 text-slate-700 shadow-sm rounded-tl-sm'}`}>
-                {msg.text}
-              </div>
-            </div>
-          ))}
-          
-          {isTyping && (
-            <div className="flex gap-3 max-w-[85%] self-start">
-              <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
-                <Bot size={16} />
-              </div>
-              <div className="p-4 bg-white border border-slate-100 shadow-sm rounded-2xl rounded-tl-sm flex gap-1 items-center">
-                <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        <form className="p-4 bg-white border-t border-slate-100 flex gap-2" onSubmit={handleSend}>
-          <input 
-            type="text" 
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Escribe tu duda aquí..."
-            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-          />
-          <button 
-            type="submit" 
-            disabled={!input.trim() || isTyping}
-            className="bg-brand-500 hover:bg-brand-600 disabled:bg-slate-300 text-white p-2.5 rounded-xl transition-colors flex items-center justify-center"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="fixed bottom-6 right-6 w-[360px] h-[600px] max-h-[80vh] bg-surface rounded-3xl shadow-floating flex flex-col overflow-hidden z-50 border border-slate-100/50"
           >
-            <Send size={18} />
-          </button>
-        </form>
-      </div>
+            <div className="bg-gradient-to-r from-brand-600 to-brand-500 text-white p-4 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
+                  <Bot size={24} />
+                </div>
+                <div>
+                  <h3 className="font-bold">ShopBot AI</h3>
+                  <div className="flex items-center gap-1.5 text-brand-100 text-xs">
+                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    En línea
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsOpen(false)} 
+                className="text-brand-100 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-slate-50/50">
+              <AnimatePresence>
+                {messages.map(msg => (
+                  <motion.div 
+                    key={msg.id} 
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'self-end flex-row-reverse' : 'self-start'}`}
+                  >
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${msg.role === 'user' ? 'bg-slate-200 text-slate-500' : 'bg-brand-100 text-brand-600'}`}>
+                      {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
+                    </div>
+                    <div className={`p-3.5 rounded-2xl text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-brand-500 text-white rounded-tr-sm' : 'bg-white border border-slate-100 text-slate-700 rounded-tl-sm'}`}>
+                      {msg.text}
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+              
+              {isTyping && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex gap-3 max-w-[85%] self-start"
+                >
+                  <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                    <Bot size={16} />
+                  </div>
+                  <div className="p-4 bg-white border border-slate-100 shadow-sm rounded-2xl rounded-tl-sm flex gap-1.5 items-center h-[46px]">
+                    <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0 }} className="w-2 h-2 bg-slate-300 rounded-full"></motion.div>
+                    <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }} className="w-2 h-2 bg-slate-300 rounded-full"></motion.div>
+                    <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }} className="w-2 h-2 bg-slate-300 rounded-full"></motion.div>
+                  </div>
+                </motion.div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            <form className="p-4 bg-white border-t border-slate-100 flex gap-2" onSubmit={handleSend}>
+              <input 
+                type="text" 
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Pregúntale algo al bot..."
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all"
+              />
+              <button 
+                type="submit" 
+                disabled={!input.trim() || isTyping}
+                className="bg-brand-500 hover:bg-brand-600 disabled:bg-slate-300 text-white w-12 rounded-xl transition-colors flex items-center justify-center shadow-md hover:shadow-lg"
+              >
+                <Send size={18} />
+              </button>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
