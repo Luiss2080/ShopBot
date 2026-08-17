@@ -11,6 +11,7 @@ import Offers from './pages/Offers';
 import About from './pages/About';
 import CartDrawer from './components/CartDrawer';
 import ChatWidget from './components/ChatWidget';
+import LoginModal from './components/LoginModal';
 import { cartAPI } from './services/api';
 
 function AnimatedRoutes({ loadCart, cart }) {
@@ -33,6 +34,7 @@ function AnimatedRoutes({ loadCart, cart }) {
 function App() {
   const [cart, setCart] = useState({ items: [], total: 0 });
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const loadCart = async () => {
     try {
@@ -51,10 +53,11 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col font-sans">
+      <div className="min-h-screen flex flex-col font-sans bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <Header 
           toggleCart={() => setIsCartOpen(true)} 
           cartCount={totalItems} 
+          openLogin={() => setIsLoginOpen(true)}
         />
         
         <main className="flex-1 relative">
@@ -68,6 +71,11 @@ function App() {
           onClose={() => setIsCartOpen(false)} 
           cart={cart}
           refreshCart={loadCart}
+        />
+
+        <LoginModal 
+          isOpen={isLoginOpen} 
+          onClose={() => setIsLoginOpen(false)} 
         />
 
         <ChatWidget onAddToCart={loadCart} />
