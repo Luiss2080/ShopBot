@@ -1,11 +1,10 @@
-const { Producto } = require('../models');
-const { Op } = require('sequelize');
+const servicioProductos = require('../servicios/servicio-productos');
 
 class ControladorProductos {
     
     async obtenerTodos(req, res, next) {
         try {
-            const productos = await Producto.findAll();
+            const productos = await servicioProductos.obtenerTodos();
             res.json(productos);
         } catch (error) {
             next(error);
@@ -15,7 +14,7 @@ class ControladorProductos {
     async obtenerPorId(req, res, next) {
         try {
             const { id } = req.params;
-            const producto = await Producto.findByPk(id);
+            const producto = await servicioProductos.obtenerPorId(id);
             if (!producto) {
                 return res.status(404).json({ error: 'Producto no encontrado' });
             }
@@ -32,14 +31,7 @@ class ControladorProductos {
                 return res.status(400).json({ error: 'Debe proporcionar un término de búsqueda' });
             }
 
-            const productos = await Producto.findAll({
-                where: {
-                    [Op.or]: [
-                        { nombre: { [Op.like]: `%${q}%` } },
-                        { descripcion: { [Op.like]: `%${q}%` } }
-                    ]
-                }
-            });
+            const productos = await servicioProductos.buscar(q);
             res.json(productos);
         } catch (error) {
             next(error);
@@ -49,13 +41,7 @@ class ControladorProductos {
     async obtenerPorCategoria(req, res, next) {
         try {
             const { categoria } = req.params;
-            const productos = await Producto.findAll({
-                where: {
-                    categoria: {
-                        [Op.like]: categoria
-                    }
-                }
-            });
+            const productos = await servicioProductos.obtenerPorCategoria(categoria);
             res.json(productos);
         } catch (error) {
             next(error);
