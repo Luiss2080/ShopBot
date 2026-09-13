@@ -1,8 +1,8 @@
 # Tareas (Tasks)
 
 ## Fase 1: Arquitectura
-- [ ] Crear middleware `errorHandler.js`
-- [ ] Refactorizar un controlador para usar capa de servicios.
+- [x] Crear middleware `errorHandler.js` (ya existente en `manejador-errores.js`)
+- [x] Refactorizar un controlador para usar capa de servicios.
 
 ## Fase 2: Tests
 - [ ] Instalar dependencias de testing (`jest`, `supertest`).
