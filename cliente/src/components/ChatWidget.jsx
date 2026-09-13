@@ -74,7 +74,7 @@ export default function ChatWidget({ onAddToCart }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed bottom-6 right-6 w-[360px] h-[600px] max-h-[80vh] bg-surface rounded-3xl shadow-floating flex flex-col overflow-hidden z-50 border border-slate-100/50"
+            className="fixed bottom-6 right-6 w-[360px] h-[600px] max-h-[80vh] bg-surface dark:bg-slate-900 rounded-3xl shadow-floating flex flex-col overflow-hidden z-50 border border-slate-100/50 dark:border-slate-800/50"
           >
             <div className="bg-gradient-to-r from-brand-600 to-brand-500 text-white p-4 flex justify-between items-center">
               <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export default function ChatWidget({ onAddToCart }) {
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-slate-50/50">
+            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-slate-50/50 dark:bg-slate-900/50">
               <AnimatePresence>
                 {messages.map(msg => (
                   <motion.div 
@@ -106,10 +106,10 @@ export default function ChatWidget({ onAddToCart }) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'self-end flex-row-reverse' : 'self-start'}`}
                   >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${msg.role === 'user' ? 'bg-slate-200 text-slate-500' : 'bg-brand-100 text-brand-600'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${msg.role === 'user' ? 'bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-300' : 'bg-brand-100 text-brand-600 dark:bg-brand-900 dark:text-brand-300'}`}>
                       {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
                     </div>
-                    <div className={`p-3.5 rounded-2xl text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-brand-500 text-white rounded-tr-sm' : 'bg-white border border-slate-100 text-slate-700 rounded-tl-sm'}`}>
+                    <div className={`p-3.5 rounded-2xl text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-brand-500 text-white rounded-tr-sm' : 'bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-tl-sm'}`}>
                       {msg.text}
                     </div>
                   </motion.div>
@@ -122,10 +122,10 @@ export default function ChatWidget({ onAddToCart }) {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex gap-3 max-w-[85%] self-start"
                 >
-                  <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-brand-100 dark:bg-brand-900 text-brand-600 dark:text-brand-300 flex items-center justify-center shrink-0">
                     <Bot size={16} />
                   </div>
-                  <div className="p-4 bg-white border border-slate-100 shadow-sm rounded-2xl rounded-tl-sm flex gap-1.5 items-center h-[46px]">
+                  <div className="p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm rounded-2xl rounded-tl-sm flex gap-1.5 items-center h-[46px]">
                     <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0 }} className="w-2 h-2 bg-slate-300 rounded-full"></motion.div>
                     <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }} className="w-2 h-2 bg-slate-300 rounded-full"></motion.div>
                     <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }} className="w-2 h-2 bg-slate-300 rounded-full"></motion.div>
@@ -135,18 +135,18 @@ export default function ChatWidget({ onAddToCart }) {
               <div ref={messagesEndRef} />
             </div>
 
-            <form className="p-4 bg-white border-t border-slate-100 flex gap-2" onSubmit={handleSend}>
+            <form className="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2" onSubmit={handleSend}>
               <input 
                 type="text" 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Pregúntale algo al bot..."
-                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all"
+                className="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 dark:text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-4 focus:ring-brand-500/10 focus:border-brand-500 transition-all"
               />
               <button 
                 type="submit" 
                 disabled={!input.trim() || isTyping}
-                className="bg-brand-500 hover:bg-brand-600 disabled:bg-slate-300 text-white w-12 rounded-xl transition-colors flex items-center justify-center shadow-md hover:shadow-lg"
+                className="bg-brand-500 hover:bg-brand-600 disabled:bg-slate-300 dark:disabled:bg-slate-700 text-white w-12 rounded-xl transition-colors flex items-center justify-center shadow-md hover:shadow-lg"
               >
                 <Send size={18} />
               </button>

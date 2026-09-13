@@ -10,8 +10,8 @@
 - [x] Escribir 1 test unitario de prueba para el bot.
 
 ## Fase 3: Frontend
-- [ ] Configurar soporte para `dark mode` en Tailwind.
-- [ ] Mejorar estilos de la burbuja de chat.
+- [x] Configurar soporte para `dark mode` en Tailwind.
+- [x] Mejorar estilos de la burbuja de chat.
 
 ## Fase 4: Funcionalidades
 - [ ] Modificar respuesta de catálogo de productos.
