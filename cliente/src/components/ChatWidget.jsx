@@ -34,9 +34,17 @@ export default function ChatWidget({ onAddToCart }) {
     try {
       const res = await chatAPI.sendMessage(userText);
       setIsTyping(false);
-      setMessages(prev => [...prev, { id: Date.now().toString(), role: 'bot', text: res.respuesta }]);
+      setMessages(prev => [...prev, { 
+        id: Date.now().toString(), 
+        role: 'bot', 
+        text: typeof res.respuesta === 'string' ? res.respuesta : res.respuesta.text,
+        options: res.respuesta.options,
+        products: res.respuesta.products
+      }]);
       
-      if (res.respuesta.toLowerCase().includes('carrito')) {
+      const respuestaTexto = typeof res.respuesta === 'string' ? res.respuesta : res.respuesta.text;
+      
+      if (respuestaTexto && respuestaTexto.toLowerCase().includes('carrito')) {
         onAddToCart();
         toast.success("Carrito actualizado desde el chat", { icon: '🤖' });
       }
@@ -109,8 +117,45 @@ export default function ChatWidget({ onAddToCart }) {
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${msg.role === 'user' ? 'bg-slate-200 text-slate-500 dark:bg-slate-700 dark:text-slate-300' : 'bg-brand-100 text-brand-600 dark:bg-brand-900 dark:text-brand-300'}`}>
                       {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
                     </div>
-                    <div className={`p-3.5 rounded-2xl text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-brand-500 text-white rounded-tr-sm' : 'bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-tl-sm'}`}>
-                      {msg.text}
+                    <div className="flex flex-col gap-2">
+                      <div className={`p-3.5 rounded-2xl text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-brand-500 text-white rounded-tr-sm' : 'bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-tl-sm'}`}>
+                        {msg.text}
+                      </div>
+                      
+                      {msg.products && msg.products.length > 0 && (
+                        <div className="flex flex-col gap-2 mt-2 w-[250px]">
+                          {msg.products.map(p => (
+                            <div key={p.id} className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl p-3 flex gap-3 items-center shadow-sm">
+                              {p.imagenUrl ? (
+                                <img src={p.imagenUrl} alt={p.nombre} className="w-12 h-12 rounded-lg object-cover" />
+                              ) : (
+                                <div className="w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center text-xl">🛍️</div>
+                              )}
+                              <div className="flex-1">
+                                <h4 className="text-xs font-bold dark:text-white line-clamp-1">{p.nombre}</h4>
+                                <p className="text-xs text-brand-600 font-medium">${p.precio}</p>
+                              </div>
+                              <button onClick={() => { setInput(`Comprar ${p.nombre}`); handleSend(new Event('submit')); }} className="bg-brand-50 hover:bg-brand-100 dark:bg-brand-900/30 dark:hover:bg-brand-900/50 text-brand-600 dark:text-brand-400 p-1.5 rounded-lg transition-colors">
+                                <span className="text-xs font-semibold">Add</span>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {msg.options && msg.options.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          {msg.options.map(opt => (
+                            <button 
+                              key={opt}
+                              onClick={() => { setInput(opt); setTimeout(() => handleSend(new Event('submit')), 100); }}
+                              className="text-xs bg-brand-50 hover:bg-brand-100 dark:bg-brand-900/20 dark:hover:bg-brand-900/40 text-brand-700 dark:text-brand-300 px-3 py-1.5 rounded-full border border-brand-200 dark:border-brand-800 transition-colors"
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 ))}

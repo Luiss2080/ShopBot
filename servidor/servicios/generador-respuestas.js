@@ -47,11 +47,32 @@ class GeneradorRespuestas {
      * @returns {Promise<string>} Respuesta generada
      */
     async generar(intencion, mensaje) {
-        const respuestasPosibles = this.respuestas[intencion] || this.respuestas.desconocida;
+        let respuestaData = { text: '', options: null, products: null };
         
-        // Seleccionar una respuesta aleatoria
+        if (intencion === 'consulta_producto') {
+            const servicioProductos = require('./servicio-productos');
+            const productos = await servicioProductos.obtenerTodos();
+            
+            respuestaData.text = 'Aquí tienes nuestro catálogo de productos:';
+            respuestaData.products = productos.slice(0, 5); // Tomar solo 5
+            return respuestaData;
+        }
+
+        if (intencion === 'desconocida') {
+            const respuestasPosibles = this.respuestas.desconocida;
+            const indiceAleatorio = Math.floor(Math.random() * respuestasPosibles.length);
+            
+            respuestaData.text = respuestasPosibles[indiceAleatorio];
+            respuestaData.options = ['Ver catálogo', 'Hablar con un asesor', 'Consultar precios'];
+            return respuestaData;
+        }
+
+        const respuestasPosibles = this.respuestas[intencion] || this.respuestas.desconocida;
         const indiceAleatorio = Math.floor(Math.random() * respuestasPosibles.length);
-        return respuestasPosibles[indiceAleatorio];
+        
+        // Si el texto anterior era un string simple
+        respuestaData.text = respuestasPosibles[indiceAleatorio];
+        return respuestaData;
     }
 
     /**

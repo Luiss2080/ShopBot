@@ -14,5 +14,5 @@
 - [x] Mejorar estilos de la burbuja de chat.
 
 ## Fase 4: Funcionalidades
-- [ ] Modificar respuesta de catálogo de productos.
-- [ ] Implementar botones de respuesta rápida (fallback).
+- [x] Modificar respuesta de catálogo de productos.
+- [x] Implementar botones de respuesta rápida (fallback).
