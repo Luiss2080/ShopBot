@@ -9,6 +9,6 @@ describe('Chat API', () => {
         
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('respuesta');
-        expect(response.body).toHaveProperty('intencion');
+        expect(response.body.respuesta).toHaveProperty('text');
     });
 });

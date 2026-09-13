@@ -66,15 +66,17 @@ app.use(manejadorErrores.capturarErrores);
 const puerto = configServidor.puerto;
 const host = configServidor.host;
 
-app.listen(puerto, host, () => {
-    console.log('='.repeat(50));
-    console.log(`🤖 ShopBot - Asistente Virtual`);
-    console.log('='.repeat(50));
-    console.log(`✅ Servidor iniciado en http://${host}:${puerto}`);
-    console.log(`📚 Documentación API: http://${host}:${puerto}/api-docs`);
-    console.log(`🌍 Entorno: ${configServidor.entorno}`);
-    console.log('='.repeat(50));
-});
+if (require.main === module) {
+    app.listen(puerto, host, () => {
+        console.log('='.repeat(50));
+        console.log(`🤖 ShopBot - Asistente Virtual`);
+        console.log('='.repeat(50));
+        console.log(`✅ Servidor iniciado en http://${host}:${puerto}`);
+        console.log(`📚 Documentación API: http://${host}:${puerto}/api-docs`);
+        console.log(`🌍 Entorno: ${configServidor.entorno}`);
+        console.log('='.repeat(50));
+    });
+}
 
 // Manejo de errores no capturados
 process.on('unhandledRejection', (error) => {

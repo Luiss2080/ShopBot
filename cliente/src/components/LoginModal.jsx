@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Gift, Package, ShoppingBag, BarChart3, ShieldCheck, ArrowRight, MapPin, Mail, Lock, Facebook, Instagram, Twitter } from 'lucide-react';
+import { X, Gift, Package, ShoppingBag, BarChart3, ShieldCheck, ArrowRight, MapPin, Mail, Lock } from 'lucide-react';
 
 export default function LoginModal({ isOpen, onClose }) {
   const [tab, setTab] = useState('login'); // 'login' or 'register'
