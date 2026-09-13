@@ -8,7 +8,7 @@
     "dev": "nodemon index.js",
     "dev:cliente": "cd cliente && npm run dev",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:cliente\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "chatbot",
@@ -33,6 +33,8 @@
   },
   "devDependencies": {
     "concurrently": "^10.0.5",
-    "nodemon": "^3.1.11"
+    "jest": "^30.5.1",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.2.2"
   }
 }
