@@ -26,6 +26,14 @@ class ClasificadorIntencionesNlp {
     }
 
     async clasificarMensaje(mensaje) {
+        if (!mensaje || typeof mensaje !== 'string' || mensaje.trim().length === 0) {
+            return {
+                intencion: 'desconocida',
+                puntuacion: 0,
+                entidades: []
+            };
+        }
+
         if (!this.modeloCargado) {
             await this.inicializar();
         }
