@@ -8,7 +8,7 @@
     "dev": "nodemon index.js",
     "dev:cliente": "cd cliente && npm run dev",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:cliente\"",
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "keywords": [
     "chatbot",
