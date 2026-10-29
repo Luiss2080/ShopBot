@@ -9,7 +9,7 @@
   "test": {
     "username": "root",
     "password": "",
-    "database": "shopbot_test",
+    "database": "shopbot_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
