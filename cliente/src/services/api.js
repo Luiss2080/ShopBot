@@ -1,42 +1,25 @@
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-
-const getSessionId = () => {
-  let id = localStorage.getItem('shopbot_session_id');
-  if (!id) {
-    id = uuidv4();
-    localStorage.setItem('shopbot_session_id', id);
-  }
-  return id;
-};
-
-const api = axios.create({
-  baseURL: '/api',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
-
-// Interceptor para agregar el session ID a todas las peticiones
-api.interceptors.request.use((config) => {
-  config.headers['x-session-id'] = getSessionId();
-  return config;
-});
+// Adaptador de compatibilidad hacia clientes HTTP por dominio
+import InstanciaClienteHttpAxios from '../compartido/cliente-http/InstanciaClienteHttpAxios';
+import ClienteApiProductos from '../modulos/catalogo/servicios/ClienteApiProductos';
+import ClienteApiCarrito from '../modulos/carrito/servicios/ClienteApiCarrito';
+import ClienteApiChatbot from '../modulos/asistente-conversacional/servicios/ClienteApiChatbot';
 
 export const productAPI = {
-  getAll: () => api.get('/productos').then(res => res.data),
-  search: (q) => api.get(`/productos/buscar?q=${q}`).then(res => res.data),
+  getAll: ClienteApiProductos.obtenerCatalogoCompleto,
+  search: ClienteApiProductos.buscarProductosPorTermino,
+  getById: ClienteApiProductos.obtenerPorIdentificador
 };
 
 export const cartAPI = {
-  getCart: () => api.get('/carrito').then(res => res.data),
-  addItem: (productoId, cantidad = 1) => api.post('/carrito', { productoId, cantidad }).then(res => res.data),
-  removeItem: (itemId) => api.delete(`/carrito/${itemId}`).then(res => res.data),
+  getCart: ClienteApiCarrito.obtenerCarritoActual,
+  addItem: ClienteApiCarrito.agregarItem,
+  removeItem: ClienteApiCarrito.eliminarItem
 };
 
 export const chatAPI = {
-  sendMessage: (mensaje) => api.post('/chat/mensaje', { mensaje }).then(res => res.data),
-  getHistory: () => api.get('/chat/historial').then(res => res.data),
+  sendMessage: ClienteApiChatbot.enviarMensajeUsuario,
+  getHistory: ClienteApiChatbot.obtenerHistorialConversacion,
+  clearHistory: ClienteApiChatbot.vaciarHistorialConversacion
 };
 
-export default api;
+export default InstanciaClienteHttpAxios;
