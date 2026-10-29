@@ -32,3 +32,4 @@ if (parametrosConexion.use_env_variable && process.env[parametrosConexion.use_en
 }
 
 module.exports = instanciaSequelize;
+

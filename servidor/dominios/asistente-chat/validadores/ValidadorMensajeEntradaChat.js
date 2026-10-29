@@ -25,3 +25,4 @@ class ValidadorMensajeEntradaChat {
 }
 
 module.exports = ValidadorMensajeEntradaChat;
+

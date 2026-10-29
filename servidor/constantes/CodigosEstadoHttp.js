@@ -15,3 +15,4 @@ const CodigosEstadoHttp = Object.freeze({
 });
 
 module.exports = CodigosEstadoHttp;
+

@@ -8,3 +8,4 @@ module.exports = {
     tiempoEsperaPeticionMs: 15000,
     origenPermitidoCors: process.env.CORS_ORIGIN || '*'
 };
+

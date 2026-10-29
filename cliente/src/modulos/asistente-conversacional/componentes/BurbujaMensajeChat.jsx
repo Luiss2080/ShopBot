@@ -46,3 +46,4 @@ export default function BurbujaMensajeChat({ mensaje, onAccionTexto }) {
     </motion.div>
   );
 }
+

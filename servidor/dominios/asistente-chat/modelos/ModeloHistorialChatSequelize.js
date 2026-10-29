@@ -35,3 +35,4 @@ ModeloHistorialChatSequelize.init({
 });
 
 module.exports = ModeloHistorialChatSequelize;
+

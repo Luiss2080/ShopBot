@@ -26,3 +26,4 @@ const MensajesSistemaConversacional = Object.freeze({
 });
 
 module.exports = MensajesSistemaConversacional;
+

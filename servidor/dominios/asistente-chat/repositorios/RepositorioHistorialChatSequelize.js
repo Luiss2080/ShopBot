@@ -59,3 +59,4 @@ class RepositorioHistorialChatSequelize {
 }
 
 module.exports = RepositorioHistorialChatSequelize;
+

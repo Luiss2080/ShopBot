@@ -15,3 +15,4 @@ export default function SugerenciasRespuestasRapidas({ opciones, onSeleccionarOp
     </div>
   );
 }
+

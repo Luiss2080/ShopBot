@@ -38,3 +38,4 @@ ModeloCarritoSequelize.belongsTo(ModeloProductoSequelize, {
 });
 
 module.exports = ModeloCarritoSequelize;
+

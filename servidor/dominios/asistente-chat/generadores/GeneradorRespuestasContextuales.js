@@ -60,3 +60,4 @@ class GeneradorRespuestasContextuales {
 }
 
 module.exports = GeneradorRespuestasContextuales;
+

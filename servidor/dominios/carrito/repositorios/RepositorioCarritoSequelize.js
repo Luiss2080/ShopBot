@@ -49,3 +49,4 @@ class RepositorioCarritoSequelize {
 }
 
 module.exports = RepositorioCarritoSequelize;
+

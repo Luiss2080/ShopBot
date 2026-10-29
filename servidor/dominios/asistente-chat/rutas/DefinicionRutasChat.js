@@ -14,3 +14,4 @@ function crearEnrutadorChat(controlador = new ControladorEndpointsChat()) {
 }
 
 module.exports = crearEnrutadorChat;
+

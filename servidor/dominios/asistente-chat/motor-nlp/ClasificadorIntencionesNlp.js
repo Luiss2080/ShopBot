@@ -52,3 +52,4 @@ class ClasificadorIntencionesNlp {
 }
 
 module.exports = ClasificadorIntencionesNlp;
+

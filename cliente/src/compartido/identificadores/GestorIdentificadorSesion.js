@@ -20,3 +20,4 @@ class GestorIdentificadorSesion {
 }
 
 export default GestorIdentificadorSesion;
+

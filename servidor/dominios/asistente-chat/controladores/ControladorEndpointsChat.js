@@ -68,3 +68,4 @@ class ControladorEndpointsChat {
 }
 
 module.exports = ControladorEndpointsChat;
+
