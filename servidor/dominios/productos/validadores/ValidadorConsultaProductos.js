@@ -30,3 +30,4 @@ class ValidadorConsultaProductos {
 }
 
 module.exports = ValidadorConsultaProductos;
+

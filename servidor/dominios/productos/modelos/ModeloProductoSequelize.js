@@ -49,3 +49,4 @@ ModeloProductoSequelize.init({
 });
 
 module.exports = ModeloProductoSequelize;
+

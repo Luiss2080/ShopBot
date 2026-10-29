@@ -44,3 +44,4 @@ describe('ServicioGestionProductos - Pruebas Unitarias Aisladas', () => {
         expect(repositorioMock.obtenerPorId).toHaveBeenCalledWith(10);
     });
 });
+

@@ -27,3 +27,4 @@ class InterceptorManejoErroresCentralizado {
 }
 
 module.exports = InterceptorManejoErroresCentralizado;
+

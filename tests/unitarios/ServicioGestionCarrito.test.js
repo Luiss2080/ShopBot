@@ -64,3 +64,4 @@ describe('ServicioGestionCarrito - Pruebas Unitarias Aisladas', () => {
         expect(mockRepoCarrito.actualizarCantidad).toHaveBeenCalledWith(5, 5);
     });
 });
+

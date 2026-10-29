@@ -25,3 +25,4 @@ describe('API de Productos - Pruebas de Integración', () => {
         expect(respuesta.body).toHaveProperty('error');
     });
 });
+

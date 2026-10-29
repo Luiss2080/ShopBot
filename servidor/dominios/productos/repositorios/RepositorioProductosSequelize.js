@@ -48,3 +48,4 @@ class RepositorioProductosSequelize {
 }
 
 module.exports = RepositorioProductosSequelize;
+

@@ -27,3 +27,4 @@ describe('API de Carrito - Pruebas de Integración', () => {
         expect(respuesta.body).toHaveProperty('error');
     });
 });
+

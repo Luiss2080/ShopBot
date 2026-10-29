@@ -66,3 +66,4 @@ class ControladorEndpointsProductos {
 }
 
 module.exports = ControladorEndpointsProductos;
+

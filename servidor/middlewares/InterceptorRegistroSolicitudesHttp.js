@@ -18,3 +18,4 @@ class InterceptorRegistroSolicitudesHttp {
 }
 
 module.exports = InterceptorRegistroSolicitudesHttp;
+
