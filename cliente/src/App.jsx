@@ -12,7 +12,7 @@ import About from './pages/About';
 import CartDrawer from './components/CartDrawer';
 import ChatWidget from './components/ChatWidget';
 import LoginModal from './components/LoginModal';
-import { cartAPI } from './services/api';
+import ClienteApiCarrito from './modulos/carrito/servicios/ClienteApiCarrito';
 
 function AnimatedRoutes({ loadCart, cart }) {
   const location = useLocation();
@@ -38,10 +38,10 @@ function App() {
 
   const loadCart = async () => {
     try {
-      const data = await cartAPI.getCart();
+      const data = await ClienteApiCarrito.obtenerCarritoActual();
       setCart(data);
     } catch (error) {
-      console.error(error);
+      console.error('Error al cargar carrito:', error);
     }
   };
 

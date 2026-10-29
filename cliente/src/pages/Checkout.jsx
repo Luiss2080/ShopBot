@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CreditCard, Truck, CheckCircle, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { cartAPI } from '../services/api';
+import ClienteApiCarrito from '../modulos/carrito/servicios/ClienteApiCarrito';
 
 export default function Checkout({ cart, refreshCart }) {
   const [step, setStep] = useState(1);
@@ -19,7 +19,7 @@ export default function Checkout({ cart, refreshCart }) {
       try {
         // Vaciar carrito
         for (const item of cart.items) {
-          await cartAPI.removeItem(item.itemId);
+          await ClienteApiCarrito.eliminarItem(item.itemId);
         }
         await refreshCart();
         setLoading(false);
