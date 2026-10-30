@@ -77,3 +77,4 @@ export default function FormularioMetodoPago({ items, total, estaCargando, onPro
     </motion.div>
   );
 }
+

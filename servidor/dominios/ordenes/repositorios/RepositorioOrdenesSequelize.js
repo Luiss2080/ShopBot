@@ -73,3 +73,4 @@ class RepositorioOrdenesSequelize {
 }
 
 module.exports = RepositorioOrdenesSequelize;
+

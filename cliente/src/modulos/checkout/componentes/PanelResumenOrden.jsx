@@ -43,3 +43,4 @@ export default function PanelResumenOrden({ items, total, estaCargando, onVolver
     </div>
   );
 }
+

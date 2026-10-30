@@ -68,3 +68,4 @@ export default function FormularioDatosEnvio({ datosEnvio, onActualizarDatos, on
     </motion.div>
   );
 }
+

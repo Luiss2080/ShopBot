@@ -50,3 +50,4 @@ ModeloOrdenSequelize.init({
 });
 
 module.exports = ModeloOrdenSequelize;
+

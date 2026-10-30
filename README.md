@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/react-19-149eca?style=for-the-badge&logo=react&logoColor=white" alt="React 19" />
   <img src="https://img.shields.io/badge/express-5-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express 5" />
   <img src="https://img.shields.io/badge/tailwind-3.4-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind 3.4" />
-  <img src="https://img.shields.io/badge/tests-17%20pasan-16a34a?style=for-the-badge" alt="17 tests pasan" />
+  <img src="https://img.shields.io/badge/tests-23%20pasan-16a34a?style=for-the-badge" alt="23 tests pasan" />
   <img src="https://img.shields.io/badge/swagger-activo-85ea2d?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger Activo" />
   <img src="https://img.shields.io/badge/licencia-MIT-lightgrey?style=for-the-badge" alt="Licencia MIT" />
   <p>
@@ -34,6 +34,7 @@
 |---|---|
 | **Catálogo de Productos** | Listado de productos con filtros por categoría, vista rápida modal y búsqueda parametrizada vía `ClienteApiProductos`. |
 | **Carrito Persistente** | Gestión reactiva de carrito ligada a sesión vía cabecera `x-session-id`, cálculo dinámico de subtotales y cantidades. |
+| **Órdenes y Checkout ACID** | Creación de pedidos persistentes (`Ordenes` y `DetallesOrden`), numeración única (`ORD-...`) y vaciado atómico de cesta en una sola transacción. |
 | **Asistente Inteligente (NLP)** | Motor `Node-NLP` integrado con clasificación semántica de intenciones (`saludo`, `consulta_producto`, `agregar_carrito`, fallback). |
 | **Respuestas Enriquecidas** | El bot retorna texto contextual, opciones rápidas de navegación (chips interactivos) y micro-tarjetas de productos con compra directa. |
 | **Documentación Interactiva** | Documentación OpenAPI / Swagger integrada y operativa en `/api-docs`. |
@@ -156,13 +157,16 @@ El proyecto cuenta con una suite completa de pruebas unitarias y de integración
 npm test
 ```
 
-### Resultados de la Suite (100% de Éxito):
+### Resultados de la Suite (100% de Éxito en 10 Suites / 23 Tests):
 - `tests/unitarios/ServicioGestionProductos.test.js`: Pruebas de reglas de catálogo con repositorios simulados.
 - `tests/unitarios/ServicioGestionCarrito.test.js`: Validación de cálculo de subtotales, totales y control de stock.
+- `tests/unitarios/ServicioGestionOrdenes.test.js`: Pruebas de transacción atómica y vaciado de carrito.
 - `tests/unitarios/ClasificadorIntencionesNlp.test.js`: Validación de precisión, resiliencia y fallback del motor NLP.
 - `tests/integracion/RutasApiProductos.test.js`: Pruebas de transporte HTTP para catálogo y filtros.
 - `tests/integracion/RutasApiCarrito.test.js`: Pruebas de sesión persistente y manipulación de cesta.
+- `tests/integracion/RutasApiOrdenes.test.js`: Pruebas de creación de órdenes y vaciado de cesta.
 - `tests/integracion/RutasApiSaludYDocumentacion.test.js`: Healthcheck `/api/salud` y documentación Swagger `/api-docs`.
+- `tests/integracion/RutasApiHistorialChatPersistente.test.js`: Persistencia de interacciones conversacionales en MySQL.
 - `tests/rutas-chat.test.js`: Flujo conversacional end-to-end con el bot.
 
 ---

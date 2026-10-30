@@ -55,3 +55,4 @@ ModeloDetalleOrdenSequelize.belongsTo(ModeloOrdenSequelize, {
 });
 
 module.exports = ModeloDetalleOrdenSequelize;
+
