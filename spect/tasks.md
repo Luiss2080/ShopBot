@@ -51,3 +51,13 @@
 - [x] Crear `WidgetChatbotConversacional.jsx` en el módulo de asistente-conversacional.
 - [x] Configurar `jest.config.js` y script `"test:coverage"` en `package.json` con umbral mínimo de 70% de cobertura.
 - [x] Cobertura global alcanzada de 78% y 100% tests aprobados (13 suites, 43 pruebas unitarias e integración).
+
+## Fase 8: Mutación Transaccional Conversacional y Página de Detalle de Producto
+- [x] Inyectar `ServicioGestionCarrito` en `GeneradorRespuestasContextuales` para mutación directa de carrito vía lenguaje natural.
+- [x] Retornar metadatos transaccionales `carritoModificado: true` en la respuesta del bot.
+- [x] Sincronizar en tiempo real el contador y drawer del carrito en el cliente (`useConversacionChatbot.js`).
+- [x] Crear componente de presentación `VistaDetalleProducto.jsx` con selector de cantidades, badges de stock y productos relacionados (< 190 líneas).
+- [x] Crear página `DetalleProducto.jsx` y registrar ruta dinámica `/producto/:id` en `App.jsx`.
+- [x] Conectar enlaces y títulos en `TarjetaProductoCatalogo.jsx` hacia `/producto/:id`.
+- [x] Corregir renderizado de imagen de producto en carrusel de chat (`CarruselProductosChat.jsx`).
+- [x] Incrementar cobertura de servidor al 80.86% de líneas y 45 tests aprobados al 100% (13 suites).

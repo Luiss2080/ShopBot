@@ -6,8 +6,8 @@
   <img src="https://img.shields.io/badge/react-19-149eca?style=for-the-badge&logo=react&logoColor=white" alt="React 19" />
   <img src="https://img.shields.io/badge/express-5-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express 5" />
   <img src="https://img.shields.io/badge/tailwind-3.4-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind 3.4" />
-  <img src="https://img.shields.io/badge/tests-43%20pasan-16a34a?style=for-the-badge" alt="43 tests pasan" />
-  <img src="https://img.shields.io/badge/cobertura-78%25-16a34a?style=for-the-badge" alt="Cobertura 78%" />
+  <img src="https://img.shields.io/badge/tests-45%20pasan-16a34a?style=for-the-badge" alt="45 tests pasan" />
+  <img src="https://img.shields.io/badge/cobertura-81%25-16a34a?style=for-the-badge" alt="Cobertura 81%" />
   <img src="https://img.shields.io/badge/swagger-activo-85ea2d?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger Activo" />
   <img src="https://img.shields.io/badge/licencia-MIT-lightgrey?style=for-the-badge" alt="Licencia MIT" />
   <p>
@@ -153,17 +153,17 @@ npm run dev:all
 
 ## 🧪 Pruebas Automatizadas y Cobertura
 
-El proyecto cuenta con una suite completa de 43 pruebas unitarias y de integración que se ejecutan sin colgar el event loop, superando el 70% de cobertura de código establecido en la especificación:
+El proyecto cuenta con una suite completa de 45 pruebas unitarias y de integración que se ejecutan sin colgar el event loop, alcanzando un 81% de cobertura de código (superando con holgura el 70% requerido):
 
 ```bash
-# Ejecutar todas las suites de prueba (13 suites, 43 pruebas)
+# Ejecutar todas las suites de prueba (13 suites, 45 pruebas)
 npm test
 
 # Ejecutar con análisis y reporte de cobertura formal
 npm run test:coverage
 ```
 
-### Resultados de la Suite (100% de Éxito en 10 Suites / 23 Tests):
+### Resultados de la Suite (100% de Éxito en 13 Suites / 45 Tests):
 - `tests/unitarios/ServicioGestionProductos.test.js`: Pruebas de reglas de catálogo con repositorios simulados.
 - `tests/unitarios/ServicioGestionCarrito.test.js`: Validación de cálculo de subtotales, totales y control de stock.
 - `tests/unitarios/ServicioGestionOrdenes.test.js`: Pruebas de transacción atómica y vaciado de carrito.
