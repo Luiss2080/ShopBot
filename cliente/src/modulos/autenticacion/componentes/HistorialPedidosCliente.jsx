@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Package, Clock, CheckCircle2, ChevronRight, ShoppingBag } from 'lucide-react';
+import { Package, Clock, CheckCircle2, ShoppingBag, Truck } from 'lucide-react';
 import ClienteApiOrdenes from '../../checkout/servicios/ClienteApiOrdenes';
+import TarjetaSeguimientoOrden from '../../checkout/componentes/TarjetaSeguimientoOrden';
 
 export default function HistorialPedidosCliente({ onIrACatalogo }) {
   const [ordenes, setOrdenes] = useState([]);
   const [estaCargando, setEstaCargando] = useState(true);
+  const [ordenExpandidaId, setOrdenExpandidaId] = useState(null);
 
   useEffect(() => {
     let montado = true;
@@ -54,45 +56,62 @@ export default function HistorialPedidosCliente({ onIrACatalogo }) {
   }
 
   return (
-    <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1">
-      {ordenes.map((orden) => (
-        <div
-          key={orden.id}
-          className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex flex-col gap-2 hover:border-brand-200 transition-colors"
-        >
-          <div className="flex items-center justify-between text-xs">
-            <span className="font-bold text-slate-800 flex items-center gap-1.5">
-              <Package size={14} className="text-brand-500" />
-              {orden.numeroOrden || `ORD-#${orden.id}`}
-            </span>
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-50 text-green-700">
-              <CheckCircle2 size={10} />
-              {orden.estado || 'Completada'}
-            </span>
-          </div>
+    <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
+      {ordenes.map((orden) => {
+        const estaExpandida = ordenExpandidaId === orden.id;
 
-          <div className="text-[11px] text-slate-400">
-            {orden.createdAt ? new Date(orden.createdAt).toLocaleString('es-ES', { dateStyle: 'medium', timeStyle: 'short' }) : 'Reciente'}
-          </div>
-
-          {orden.detalles && orden.detalles.length > 0 && (
-            <div className="bg-slate-50 rounded-xl p-2 text-xs space-y-1">
-              {orden.detalles.map((detalle, idx) => (
-                <div key={idx} className="flex justify-between text-slate-600 text-[11px]">
-                  <span className="truncate max-w-[200px]">{detalle.cantidad}x {detalle.nombreProducto}</span>
-                  <span className="font-medium">${Number(detalle.precioUnitario * detalle.cantidad).toFixed(2)}</span>
-                </div>
-              ))}
+        return (
+          <div
+            key={orden.id}
+            className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex flex-col gap-2 hover:border-brand-200 transition-colors"
+          >
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-bold text-slate-800 flex items-center gap-1.5">
+                <Package size={14} className="text-brand-500" />
+                {orden.numeroOrden || `ORD-#${orden.id}`}
+              </span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-50 text-green-700">
+                <CheckCircle2 size={10} />
+                {orden.estado || 'Completada'}
+              </span>
             </div>
-          )}
 
-          <div className="flex justify-between items-center pt-1 border-t border-slate-50 text-xs">
-            <span className="font-medium text-slate-500">Total pagado:</span>
-            <span className="font-black text-brand-600 text-sm">${Number(orden.total).toFixed(2)}</span>
+            <div className="text-[11px] text-slate-400">
+              {orden.createdAt ? new Date(orden.createdAt).toLocaleString('es-ES', { dateStyle: 'medium', timeStyle: 'short' }) : 'Reciente'}
+            </div>
+
+            {orden.detalles && orden.detalles.length > 0 && (
+              <div className="bg-slate-50 rounded-xl p-2 text-xs space-y-1">
+                {orden.detalles.map((detalle, idx) => (
+                  <div key={idx} className="flex justify-between text-slate-600 text-[11px]">
+                    <span className="truncate max-w-[200px]">{detalle.cantidad}x {detalle.nombreProducto}</span>
+                    <span className="font-medium">${Number(detalle.precioUnitario * detalle.cantidad).toFixed(2)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="flex justify-between items-center pt-1 border-t border-slate-50 text-xs">
+              <button
+                type="button"
+                onClick={() => setOrdenExpandidaId(estaExpandida ? null : orden.id)}
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-brand-600 hover:text-brand-700 transition-colors"
+              >
+                <Truck size={12} />
+                {estaExpandida ? 'Ocultar rastreo' : 'Rastrear envío →'}
+              </button>
+              <div className="flex items-baseline gap-1">
+                <span className="text-[11px] text-slate-400">Total:</span>
+                <span className="font-black text-brand-600 text-sm">${Number(orden.total).toFixed(2)}</span>
+              </div>
+            </div>
+
+            {estaExpandida && (
+              <TarjetaSeguimientoOrden orden={orden} />
+            )}
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
-
