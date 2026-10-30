@@ -50,6 +50,13 @@ class EntrenadorCorpusConversacional {
         gestorNlp.addDocument('es', 'rastrear pedido %numero%', 'seguimiento_orden');
         gestorNlp.addDocument('es', 'seguimiento de orden', 'seguimiento_orden');
 
+        // Cupones y promociones
+        gestorNlp.addDocument('es', 'tienen cupones', 'consulta_cupon');
+        gestorNlp.addDocument('es', 'tienen descuento', 'consulta_cupon');
+        gestorNlp.addDocument('es', 'tienen promociones', 'consulta_cupon');
+        gestorNlp.addDocument('es', 'codigo de descuento', 'consulta_cupon');
+        gestorNlp.addDocument('es', 'hay algun cupon', 'consulta_cupon');
+
         await gestorNlp.train();
         gestorNlp.save(rutaArchivoModelo);
         return gestorNlp;

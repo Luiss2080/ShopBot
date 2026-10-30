@@ -35,6 +35,14 @@ class GeneradorRespuestasContextuales {
             return await this._generarRespuestaSeguimientoOrden(mensajeOriginal, sessionId);
         }
 
+        if (intencion === 'consulta_cupon') {
+            return {
+                text: '¡Sí! Puedes usar el cupón "SHOPBOT10" al tramitar tu pedido para obtener un 10% de descuento en tu compra.',
+                options: ['Ver catálogo', 'Ver mi carrito'],
+                products: null
+            };
+        }
+
         if (intencion === 'saludo') {
             return {
                 text: this.seleccionarAleatorio(MensajesSistemaConversacional.SALUDOS),
