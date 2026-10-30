@@ -37,6 +37,7 @@ function instanciarServidorHttp() {
     aplicacionExpress.use('/api/productos', crearEnrutadorProductos());
     aplicacionExpress.use('/api/carrito', crearEnrutadorCarrito());
     aplicacionExpress.use('/api/chat', crearEnrutadorChat());
+    aplicacionExpress.use('/api/ordenes', crearEnrutadorOrdenes());
 
     // Endpoint de monitoreo y salud
     aplicacionExpress.get('/api/salud', (req, res) => {
