@@ -72,3 +72,4 @@ describe('ServicioGestionOrdenes - Pruebas Unitarias Aisladas', () => {
         expect(mockRepoOrdenes.crearOrdenConDetalles).toHaveBeenCalled();
     });
 });
+
