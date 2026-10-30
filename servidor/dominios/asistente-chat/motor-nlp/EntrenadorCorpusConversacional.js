@@ -41,6 +41,15 @@ class EntrenadorCorpusConversacional {
         gestorNlp.addDocument('es', 'ver mi carrito', 'ver_carrito');
         gestorNlp.addDocument('es', 'mostrar carrito', 'ver_carrito');
 
+        // Seguimiento de orden y rastreo
+        gestorNlp.addDocument('es', 'donde esta mi orden', 'seguimiento_orden');
+        gestorNlp.addDocument('es', 'donde esta mi pedido', 'seguimiento_orden');
+        gestorNlp.addDocument('es', 'estado de mi pedido', 'seguimiento_orden');
+        gestorNlp.addDocument('es', 'estado de mi orden', 'seguimiento_orden');
+        gestorNlp.addDocument('es', 'rastrear mi compra', 'seguimiento_orden');
+        gestorNlp.addDocument('es', 'rastrear pedido %numero%', 'seguimiento_orden');
+        gestorNlp.addDocument('es', 'seguimiento de orden', 'seguimiento_orden');
+
         await gestorNlp.train();
         gestorNlp.save(rutaArchivoModelo);
         return gestorNlp;
@@ -51,4 +60,3 @@ module.exports = {
     EntrenadorCorpusConversacional,
     rutaArchivoModelo
 };
-

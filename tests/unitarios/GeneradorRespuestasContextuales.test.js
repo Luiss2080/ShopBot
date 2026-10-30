@@ -6,6 +6,7 @@ const MensajesSistemaConversacional = require('../../servidor/constantes/Mensaje
 describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
     let mockServicioProductos;
     let mockServicioCarrito;
+    let mockServicioOrdenes;
     let generador;
 
     const productosFicticios = [
@@ -26,7 +27,27 @@ describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
         mockServicioCarrito = {
             agregarOActualizarProducto: jest.fn().mockResolvedValue({ id: 10, cantidad: 1 })
         };
-        generador = new GeneradorRespuestasContextuales(mockServicioProductos, mockServicioCarrito);
+        mockServicioOrdenes = {
+            consultarOrdenPorNumero: jest.fn().mockImplementation((num) => {
+                if (num === 'ORD-12345-ABC') {
+                    return Promise.resolve({
+                        numeroOrden: 'ORD-12345-ABC',
+                        estado: 'EN_CAMINO',
+                        total: 350.0,
+                        direccionEnvio: 'Calle Principal 123'
+                    });
+                }
+                return Promise.reject(new Error('No encontrada'));
+            }),
+            consultarHistorialOrdenesSesion: jest.fn().mockResolvedValue([
+                {
+                    numeroOrden: 'ORD-99999-XYZ',
+                    estado: 'COMPLETADO',
+                    total: 800.0
+                }
+            ])
+        };
+        generador = new GeneradorRespuestasContextuales(mockServicioProductos, mockServicioCarrito, mockServicioOrdenes);
     });
 
     test('debe responder adecuadamente a la intención de saludo', async () => {
@@ -127,6 +148,38 @@ describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
         expect(respuesta.text).toContain('pulsando "+ Añadir" en cualquiera');
         expect(respuesta.products.length).toBe(2);
         expect(respuesta.carritoModificado).toBe(false);
+    });
+
+    test('debe responder a seguimiento_orden con número de orden específico', async () => {
+        const respuesta = await generador.generarRespuesta(
+            { intencion: 'seguimiento_orden' },
+            '¿Dónde está mi orden ORD-12345-ABC?'
+        );
+        expect(mockServicioOrdenes.consultarOrdenPorNumero).toHaveBeenCalledWith('ORD-12345-ABC');
+        expect(respuesta.text).toContain('ORD-12345-ABC');
+        expect(respuesta.text).toContain('EN_CAMINO');
+        expect(respuesta.text).toContain('Calle Principal 123');
+    });
+
+    test('debe responder a seguimiento_orden con la orden más reciente si no se da código', async () => {
+        const respuesta = await generador.generarRespuesta(
+            { intencion: 'seguimiento_orden' },
+            '¿Cuál es el estado de mi pedido?',
+            'sesion-activa-cliente'
+        );
+        expect(mockServicioOrdenes.consultarHistorialOrdenesSesion).toHaveBeenCalledWith('sesion-activa-cliente');
+        expect(respuesta.text).toContain('ORD-99999-XYZ');
+        expect(respuesta.text).toContain('COMPLETADO');
+    });
+
+    test('debe responder amablemente a seguimiento_orden si no hay pedidos asociados', async () => {
+        mockServicioOrdenes.consultarHistorialOrdenesSesion.mockResolvedValueOnce([]);
+        const respuesta = await generador.generarRespuesta(
+            { intencion: 'seguimiento_orden' },
+            'estado de mi orden',
+            'sesion-sin-compras'
+        );
+        expect(respuesta.text).toContain('No encontré pedidos asociados');
     });
 
     test('debe emitir fallback cuando la intención es desconocida', async () => {

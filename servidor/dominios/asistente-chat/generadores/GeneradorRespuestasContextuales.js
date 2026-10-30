@@ -3,14 +3,17 @@
 const MensajesSistemaConversacional = require('../../../constantes/MensajesSistemaConversacional');
 const ServicioGestionProductos = require('../../productos/servicios/ServicioGestionProductos');
 const ServicioGestionCarrito = require('../../carrito/servicios/ServicioGestionCarrito');
+const ServicioGestionOrdenes = require('../../ordenes/servicios/ServicioGestionOrdenes');
 
 class GeneradorRespuestasContextuales {
     constructor(
         servicioProductos = new ServicioGestionProductos(),
-        servicioCarrito = new ServicioGestionCarrito()
+        servicioCarrito = new ServicioGestionCarrito(),
+        servicioOrdenes = new ServicioGestionOrdenes()
     ) {
         this.servicioProductos = servicioProductos;
         this.servicioCarrito = servicioCarrito;
+        this.servicioOrdenes = servicioOrdenes;
     }
 
     async generarRespuesta(clasificacion, mensajeOriginal = '', sessionId = null) {
@@ -26,6 +29,10 @@ class GeneradorRespuestasContextuales {
 
         if (intencion === 'agregar_carrito') {
             return await this._generarRespuestaAgregarCarrito(mensajeOriginal, sessionId);
+        }
+
+        if (intencion === 'seguimiento_orden') {
+            return await this._generarRespuestaSeguimientoOrden(mensajeOriginal, sessionId);
         }
 
         if (intencion === 'saludo') {
@@ -140,6 +147,47 @@ class GeneradorRespuestasContextuales {
         };
     }
 
+    async _generarRespuestaSeguimientoOrden(mensajeOriginal, sessionId = null) {
+        const coincidenciaNumero = (mensajeOriginal || '').match(/(ORD-[A-Z0-9-]+)/i);
+
+        if (coincidenciaNumero && this.servicioOrdenes) {
+            try {
+                const orden = await this.servicioOrdenes.consultarOrdenPorNumero(coincidenciaNumero[1].toUpperCase());
+                if (orden) {
+                    return {
+                        text: `Tu pedido ${orden.numeroOrden} se encuentra en estado "${orden.estado}". Total: $${Number(orden.total).toFixed(2)}. Destino: ${orden.direccionEnvio}.`,
+                        options: ['Ver catálogo', 'Ver mi carrito'],
+                        products: null
+                    };
+                }
+            } catch {
+                // Si no se encuentra con ese número exacto, continuar a búsqueda por sesión
+            }
+        }
+
+        if (sessionId && this.servicioOrdenes) {
+            try {
+                const historial = await this.servicioOrdenes.consultarHistorialOrdenesSesion(sessionId);
+                if (historial && historial.length > 0) {
+                    const ultimaOrden = historial[0];
+                    return {
+                        text: `Tu pedido más reciente (${ultimaOrden.numeroOrden}) está en estado "${ultimaOrden.estado}". Total: $${Number(ultimaOrden.total).toFixed(2)}.`,
+                        options: ['Ver catálogo', 'Ver mi carrito'],
+                        products: null
+                    };
+                }
+            } catch {
+                // Fallback defensivo
+            }
+        }
+
+        return {
+            text: 'No encontré pedidos asociados para rastrear en este momento. Si tienes un código de orden (ORD-...), por favor facilítamelo.',
+            options: ['Ver catálogo', 'Consultar ofertas'],
+            products: null
+        };
+    }
+
     _extraerTerminoBusqueda(mensajeTexto) {
         if (!mensajeTexto || typeof mensajeTexto !== 'string') return '';
         const stopWords = [
@@ -147,7 +195,7 @@ class GeneradorRespuestasContextuales {
             'un', 'una', 'unos', 'unas', 'quiero', 'comprar', 'tienen', 'tiene',
             'hay', 'alguna', 'algun', 'algunos', 'algunas', 'disponible', 'disponibles',
             'estoy', 'buscando', 'agregar', 'añadir', 'al', 'carro', 'carrito',
-            'por', 'favor', 'ver', 'mostrar'
+            'por', 'favor', 'ver', 'mostrar', 'donde', 'esta', 'estado', 'pedido', 'orden'
         ];
         const palabras = mensajeTexto
             .toLowerCase()
