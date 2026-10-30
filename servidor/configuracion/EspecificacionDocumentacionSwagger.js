@@ -23,7 +23,8 @@ const opcionesSwagger = {
         tags: [
             { name: 'Productos', description: 'Catálogo y consulta de inventario' },
             { name: 'Carrito', description: 'Gestión de cesta de compra por sesión' },
-            { name: 'Chat', description: 'Interacción inteligente con el asistente virtual' }
+            { name: 'Chat', description: 'Interacción inteligente con el asistente virtual' },
+            { name: 'Ordenes', description: 'Creación y consulta de pedidos y compras' }
         ]
     },
     apis: [

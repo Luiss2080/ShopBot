@@ -15,6 +15,7 @@ const ValidadorIdentificadorSesionHttp = require('./middlewares/ValidadorIdentif
 const crearEnrutadorProductos = require('./dominios/productos/rutas/DefinicionRutasProductos');
 const crearEnrutadorCarrito = require('./dominios/carrito/rutas/DefinicionRutasCarrito');
 const crearEnrutadorChat = require('./dominios/asistente-chat/rutas/DefinicionRutasChat');
+const crearEnrutadorOrdenes = require('./dominios/ordenes/rutas/DefinicionRutasOrdenes');
 
 function instanciarServidorHttp() {
     const aplicacionExpress = express();
