@@ -202,3 +202,4 @@ export default function VistaDetalleProducto({ idProducto, onAddToCart }) {
     </div>
   );
 }
+
