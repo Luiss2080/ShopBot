@@ -12,12 +12,15 @@ class GeneradorRespuestasContextuales {
         const { intencion } = clasificacion;
 
         if (intencion === 'consulta_producto') {
-            const catalogoDestacado = await this.servicioProductos.obtenerMuestraProductosChat(4);
-            return {
-                text: 'Aquí tienes algunos de nuestros productos disponibles en tienda:',
-                products: catalogoDestacado.map(p => p.toJSON ? p.toJSON() : p),
-                options: ['Ver catálogo completo', 'Ver mi carrito']
-            };
+            return await this._generarRespuestaCatalogoOProductos(mensajeOriginal);
+        }
+
+        if (intencion === 'consulta_precio') {
+            return await this._generarRespuestaConsultaPrecio(mensajeOriginal);
+        }
+
+        if (intencion === 'agregar_carrito') {
+            return await this._generarRespuestaAgregarCarrito(mensajeOriginal);
         }
 
         if (intencion === 'saludo') {
@@ -44,12 +47,84 @@ class GeneradorRespuestasContextuales {
             };
         }
 
-        // Intención desconocida o fallback
         return {
             text: this.seleccionarAleatorio(MensajesSistemaConversacional.FALLBACK_DESCONOCIDO),
             options: MensajesSistemaConversacional.OPCIONES_RAPIDAS_DEFECTO,
             products: null
         };
+    }
+
+    async _generarRespuestaCatalogoOProductos(mensajeOriginal) {
+        const termino = this._extraerTerminoBusqueda(mensajeOriginal);
+        let productos = [];
+        if (termino && termino.length >= 2) {
+            productos = await this.servicioProductos.buscarProductosPorTermino(termino);
+        }
+        if (!productos || productos.length === 0) {
+            productos = await this.servicioProductos.obtenerMuestraProductosChat(4);
+        }
+        return {
+            text: 'Aquí tienes algunos de nuestros productos disponibles en tienda:',
+            products: productos.map(p => (p.toJSON ? p.toJSON() : p)),
+            options: ['Ver catálogo completo', 'Ver mi carrito']
+        };
+    }
+
+    async _generarRespuestaConsultaPrecio(mensajeOriginal) {
+        const termino = this._extraerTerminoBusqueda(mensajeOriginal);
+        let productosEncontrados = [];
+        if (termino && termino.length >= 2) {
+            productosEncontrados = await this.servicioProductos.buscarProductosPorTermino(termino);
+        }
+
+        if (productosEncontrados && productosEncontrados.length > 0) {
+            return {
+                text: `Encontré ${productosEncontrados.length} producto(s) relacionado(s) con tu consulta de precios:`,
+                products: productosEncontrados.map(p => (p.toJSON ? p.toJSON() : p)),
+                options: ['Ver catálogo completo', 'Ver mi carrito']
+            };
+        }
+
+        const muestraGeneral = await this.servicioProductos.obtenerMuestraProductosChat(3);
+        return {
+            text: 'Aquí tienes los precios de algunos de nuestros productos más destacados:',
+            products: muestraGeneral.map(p => (p.toJSON ? p.toJSON() : p)),
+            options: ['Ver catálogo completo', 'Ver mi carrito']
+        };
+    }
+
+    async _generarRespuestaAgregarCarrito(mensajeOriginal) {
+        const termino = this._extraerTerminoBusqueda(mensajeOriginal);
+        let productosSugeridos = [];
+        if (termino && termino.length >= 2) {
+            productosSugeridos = await this.servicioProductos.buscarProductosPorTermino(termino);
+        }
+
+        if (productosSugeridos && productosSugeridos.length > 0) {
+            return {
+                text: 'Haz clic en "+ Añadir" en la tarjeta del producto que desees agregar a tu carrito:',
+                products: productosSugeridos.map(p => (p.toJSON ? p.toJSON() : p)),
+                options: ['Ver mi carrito', 'Ir a pagar']
+            };
+        }
+
+        const muestra = await this.servicioProductos.obtenerMuestraProductosChat(3);
+        return {
+            text: 'Puedes agregar productos directamente pulsando "+ Añadir" en cualquiera de las siguientes opciones:',
+            products: muestra.map(p => (p.toJSON ? p.toJSON() : p)),
+            options: ['Ver catálogo completo', 'Ver mi carrito']
+        };
+    }
+
+    _extraerTerminoBusqueda(mensajeTexto) {
+        if (!mensajeTexto || typeof mensajeTexto !== 'string') return '';
+        const stopWords = ['cuanto', 'cuesta', 'precio', 'valor', 'el', 'la', 'los', 'las', 'de', 'un', 'una', 'quiero', 'comprar', 'tienen', 'estoy', 'buscando', 'agregar', 'añadir', 'al', 'carro', 'carrito', 'por', 'favor', 'ver', 'mostrar'];
+        const palabras = mensajeTexto
+            .toLowerCase()
+            .replace(/[¿?¡!.,;:()]/g, '')
+            .split(/\s+/)
+            .filter(p => p.length > 1 && !stopWords.includes(p));
+        return palabras.join(' ');
     }
 
     seleccionarAleatorio(lista) {
@@ -60,4 +135,3 @@ class GeneradorRespuestasContextuales {
 }
 
 module.exports = GeneradorRespuestasContextuales;
-
