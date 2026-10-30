@@ -75,3 +75,4 @@ export default function CabeceraNavegacionPrincipal({ toggleCart, cartCount, ope
     </header>
   );
 }
+

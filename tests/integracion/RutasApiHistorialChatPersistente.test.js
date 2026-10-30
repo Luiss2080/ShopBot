@@ -33,3 +33,4 @@ describe('API de Historial de Chat Persistente en Base de Datos', () => {
         expect(respuestaLimpieza.status).toBe(200);
     });
 });
+

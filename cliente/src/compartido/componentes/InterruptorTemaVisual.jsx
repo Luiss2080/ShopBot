@@ -21,3 +21,4 @@ export default function InterruptorTemaVisual() {
     </motion.button>
   );
 }
+

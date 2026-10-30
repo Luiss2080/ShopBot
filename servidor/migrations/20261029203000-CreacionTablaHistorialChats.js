@@ -41,3 +41,4 @@ module.exports = {
     await queryInterface.dropTable('HistorialChats');
   }
 };
+
