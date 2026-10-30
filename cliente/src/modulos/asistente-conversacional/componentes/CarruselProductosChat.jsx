@@ -8,9 +8,9 @@ export default function CarruselProductosChat({ productos, onComprarProducto }) 
           key={producto.id}
           className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl p-3 flex gap-3 items-center shadow-sm"
         >
-          {producto.imagenUrl ? (
+          {(producto.imagen || producto.imagenUrl) ? (
             <img
-              src={producto.imagenUrl}
+              src={producto.imagen || producto.imagenUrl}
               alt={producto.nombre}
               className="w-12 h-12 rounded-lg object-cover"
             />
