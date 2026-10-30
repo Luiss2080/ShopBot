@@ -24,7 +24,8 @@ const opcionesSwagger = {
             { name: 'Productos', description: 'Catálogo y consulta de inventario' },
             { name: 'Carrito', description: 'Gestión de cesta de compra por sesión' },
             { name: 'Chat', description: 'Interacción inteligente con el asistente virtual' },
-            { name: 'Ordenes', description: 'Creación y consulta de pedidos y compras' }
+            { name: 'Ordenes', description: 'Creación y consulta de pedidos y compras' },
+            { name: 'Autenticación', description: 'Registro, inicio de sesión y gestión de perfiles' }
         ]
     },
     apis: [
