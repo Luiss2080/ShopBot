@@ -5,6 +5,7 @@ const MensajesSistemaConversacional = require('../../servidor/constantes/Mensaje
 
 describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
     let mockServicioProductos;
+    let mockServicioCarrito;
     let generador;
 
     const productosFicticios = [
@@ -22,7 +23,10 @@ describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
                 return Promise.resolve([]);
             })
         };
-        generador = new GeneradorRespuestasContextuales(mockServicioProductos);
+        mockServicioCarrito = {
+            agregarOActualizarProducto: jest.fn().mockResolvedValue({ id: 10, cantidad: 1 })
+        };
+        generador = new GeneradorRespuestasContextuales(mockServicioProductos, mockServicioCarrito);
     });
 
     test('debe responder adecuadamente a la intención de saludo', async () => {
@@ -83,13 +87,36 @@ describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
         expect(mockServicioProductos.obtenerMuestraProductosChat).toHaveBeenCalled();
     });
 
-    test('debe responder a agregar_carrito guiando la adición con productos coincidentes', async () => {
+    test('debe mutar el carrito directamente en agregar_carrito cuando hay sessionId y producto', async () => {
         const respuesta = await generador.generarRespuesta(
             { intencion: 'agregar_carrito' },
-            'Quiero agregar laptop'
+            'Quiero agregar la laptop al carrito',
+            'sesion-usuario-123'
+        );
+        expect(mockServicioCarrito.agregarOActualizarProducto).toHaveBeenCalledWith('sesion-usuario-123', 1, 1);
+        expect(respuesta.carritoModificado).toBe(true);
+        expect(respuesta.text).toContain('He añadido "Laptop Gamer Ultra"');
+    });
+
+    test('debe responder guiando al usuario si no hay sessionId en agregar_carrito con producto', async () => {
+        const respuesta = await generador.generarRespuesta(
+            { intencion: 'agregar_carrito' },
+            'Quiero agregar laptop',
+            null
         );
         expect(respuesta.text).toContain('Haz clic en "+ Añadir"');
-        expect(respuesta.products[0].id).toBe(1);
+        expect(respuesta.carritoModificado).toBe(false);
+    });
+
+    test('debe manejar error de adición en el carrito con fallback defensivo', async () => {
+        mockServicioCarrito.agregarOActualizarProducto.mockRejectedValueOnce(new Error('Fallo DB'));
+        const respuesta = await generador.generarRespuesta(
+            { intencion: 'agregar_carrito' },
+            'Quiero agregar laptop',
+            'sesion-123'
+        );
+        expect(respuesta.text).toContain('Haz clic en "+ Añadir"');
+        expect(respuesta.carritoModificado).toBe(false);
     });
 
     test('debe responder a agregar_carrito general si no se menciona un producto', async () => {
@@ -97,8 +124,9 @@ describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
             { intencion: 'agregar_carrito' },
             'agregar al carro por favor'
         );
-        expect(respuesta.text).toContain('directamente pulsando "+ Añadir"');
+        expect(respuesta.text).toContain('pulsando "+ Añadir" en cualquiera');
         expect(respuesta.products.length).toBe(2);
+        expect(respuesta.carritoModificado).toBe(false);
     });
 
     test('debe emitir fallback cuando la intención es desconocida', async () => {

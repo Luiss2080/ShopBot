@@ -2,13 +2,18 @@
 
 const MensajesSistemaConversacional = require('../../../constantes/MensajesSistemaConversacional');
 const ServicioGestionProductos = require('../../productos/servicios/ServicioGestionProductos');
+const ServicioGestionCarrito = require('../../carrito/servicios/ServicioGestionCarrito');
 
 class GeneradorRespuestasContextuales {
-    constructor(servicioProductos = new ServicioGestionProductos()) {
+    constructor(
+        servicioProductos = new ServicioGestionProductos(),
+        servicioCarrito = new ServicioGestionCarrito()
+    ) {
         this.servicioProductos = servicioProductos;
+        this.servicioCarrito = servicioCarrito;
     }
 
-    async generarRespuesta(clasificacion, mensajeOriginal = '') {
+    async generarRespuesta(clasificacion, mensajeOriginal = '', sessionId = null) {
         const { intencion } = clasificacion;
 
         if (intencion === 'consulta_producto') {
@@ -20,7 +25,7 @@ class GeneradorRespuestasContextuales {
         }
 
         if (intencion === 'agregar_carrito') {
-            return await this._generarRespuestaAgregarCarrito(mensajeOriginal);
+            return await this._generarRespuestaAgregarCarrito(mensajeOriginal, sessionId);
         }
 
         if (intencion === 'saludo') {
@@ -93,7 +98,7 @@ class GeneradorRespuestasContextuales {
         };
     }
 
-    async _generarRespuestaAgregarCarrito(mensajeOriginal) {
+    async _generarRespuestaAgregarCarrito(mensajeOriginal, sessionId = null) {
         const termino = this._extraerTerminoBusqueda(mensajeOriginal);
         let productosSugeridos = [];
         if (termino && termino.length >= 2) {
@@ -101,10 +106,28 @@ class GeneradorRespuestasContextuales {
         }
 
         if (productosSugeridos && productosSugeridos.length > 0) {
+            const productoSeleccionado = productosSugeridos[0];
+            const productoFormateado = productoSeleccionado.toJSON ? productoSeleccionado.toJSON() : productoSeleccionado;
+
+            if (sessionId && this.servicioCarrito) {
+                try {
+                    await this.servicioCarrito.agregarOActualizarProducto(sessionId, productoSeleccionado.id, 1);
+                    return {
+                        text: `¡Listo! He añadido "${productoSeleccionado.nombre}" ($${Number(productoSeleccionado.precio).toFixed(2)}) a tu carrito.`,
+                        products: [productoFormateado],
+                        options: ['Ver mi carrito', 'Ir a pagar', 'Continuar comprando'],
+                        carritoModificado: true
+                    };
+                } catch {
+                    // Fallback a selección asistida
+                }
+            }
+
             return {
                 text: 'Haz clic en "+ Añadir" en la tarjeta del producto que desees agregar a tu carrito:',
                 products: productosSugeridos.map(p => (p.toJSON ? p.toJSON() : p)),
-                options: ['Ver mi carrito', 'Ir a pagar']
+                options: ['Ver mi carrito', 'Ir a pagar'],
+                carritoModificado: false
             };
         }
 
@@ -112,7 +135,8 @@ class GeneradorRespuestasContextuales {
         return {
             text: 'Puedes agregar productos directamente pulsando "+ Añadir" en cualquiera de las siguientes opciones:',
             products: muestra.map(p => (p.toJSON ? p.toJSON() : p)),
-            options: ['Ver catálogo completo', 'Ver mi carrito']
+            options: ['Ver catálogo completo', 'Ver mi carrito'],
+            carritoModificado: false
         };
     }
 

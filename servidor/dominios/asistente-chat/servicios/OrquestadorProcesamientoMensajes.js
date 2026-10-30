@@ -17,7 +17,7 @@ class OrquestadorProcesamientoMensajes {
 
     async procesarMensajeUsuario(mensajeTexto, sessionId = null) {
         const clasificacion = await this.clasificadorNlp.clasificarMensaje(mensajeTexto);
-        const respuestaConstruida = await this.generadorRespuestas.generarRespuesta(clasificacion, mensajeTexto);
+        const respuestaConstruida = await this.generadorRespuestas.generarRespuesta(clasificacion, mensajeTexto, sessionId);
 
         await this.repositorioHistorial.guardarInteraccion({
             sessionId,
