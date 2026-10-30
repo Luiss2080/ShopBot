@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ShoppingBag, Zap, Truck, ShieldCheck, HeadphonesIcon } from 'lucide-react';
-import ProductList from '../components/ProductList';
+import GrillaProductosCatalogo from '../modulos/catalogo/componentes/GrillaProductosCatalogo';
 
 export default function Home({ loadCart }) {
   return (
@@ -94,7 +94,7 @@ export default function Home({ loadCart }) {
             <p className="text-slate-500 mt-2 text-lg">Los mejores equipos para potenciar tu creatividad.</p>
           </div>
         </div>
-        <ProductList onAddToCart={loadCart} />
+        <GrillaProductosCatalogo onAddToCart={loadCart} />
       </section>
       
       {/* Newsletter Section */}
