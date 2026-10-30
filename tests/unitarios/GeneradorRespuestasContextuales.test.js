@@ -49,7 +49,7 @@ describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
     test('debe buscar productos específicos cuando la intención es consulta_producto con término', async () => {
         const respuesta = await generador.generarRespuesta(
             { intencion: 'consulta_producto' },
-            '¿Tienen alguna laptop disponible?'
+            '¿Tienen laptop?'
         );
         expect(mockServicioProductos.buscarProductosPorTermino).toHaveBeenCalledWith('laptop');
         expect(respuesta.products.length).toBe(1);

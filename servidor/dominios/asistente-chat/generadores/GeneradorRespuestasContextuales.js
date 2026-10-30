@@ -118,7 +118,13 @@ class GeneradorRespuestasContextuales {
 
     _extraerTerminoBusqueda(mensajeTexto) {
         if (!mensajeTexto || typeof mensajeTexto !== 'string') return '';
-        const stopWords = ['cuanto', 'cuesta', 'precio', 'valor', 'el', 'la', 'los', 'las', 'de', 'un', 'una', 'quiero', 'comprar', 'tienen', 'estoy', 'buscando', 'agregar', 'añadir', 'al', 'carro', 'carrito', 'por', 'favor', 'ver', 'mostrar'];
+        const stopWords = [
+            'cuanto', 'cuesta', 'precio', 'valor', 'el', 'la', 'los', 'las', 'de',
+            'un', 'una', 'unos', 'unas', 'quiero', 'comprar', 'tienen', 'tiene',
+            'hay', 'alguna', 'algun', 'algunos', 'algunas', 'disponible', 'disponibles',
+            'estoy', 'buscando', 'agregar', 'añadir', 'al', 'carro', 'carrito',
+            'por', 'favor', 'ver', 'mostrar'
+        ];
         const palabras = mensajeTexto
             .toLowerCase()
             .replace(/[¿?¡!.,;:()]/g, '')
