@@ -29,3 +29,4 @@ class RepositorioUsuariosSequelize {
 }
 
 module.exports = RepositorioUsuariosSequelize;
+

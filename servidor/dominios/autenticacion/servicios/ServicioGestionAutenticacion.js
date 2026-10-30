@@ -71,3 +71,4 @@ class ServicioGestionAutenticacion {
 }
 
 module.exports = ServicioGestionAutenticacion;
+

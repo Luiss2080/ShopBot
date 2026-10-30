@@ -74,3 +74,4 @@ class ControladorEndpointsAutenticacion {
 }
 
 module.exports = ControladorEndpointsAutenticacion;
+

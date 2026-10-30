@@ -25,3 +25,4 @@ class ServicioCriptografiaContrasenas {
 }
 
 module.exports = ServicioCriptografiaContrasenas;
+

@@ -14,3 +14,4 @@ function crearEnrutadorAutenticacion(controlador = new ControladorEndpointsAuten
 }
 
 module.exports = crearEnrutadorAutenticacion;
+

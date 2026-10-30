@@ -64,3 +64,4 @@ class ValidadorCredencialesUsuario {
 }
 
 module.exports = ValidadorCredencialesUsuario;
+

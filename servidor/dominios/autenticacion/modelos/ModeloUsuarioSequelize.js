@@ -51,3 +51,4 @@ ModeloUsuarioSequelize.init({
 });
 
 module.exports = ModeloUsuarioSequelize;
+

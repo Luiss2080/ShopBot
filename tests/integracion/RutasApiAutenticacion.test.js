@@ -62,3 +62,4 @@ describe('API de Autenticación - Pruebas de Integración', () => {
         expect(respuesta.body).toHaveProperty('error');
     });
 });
+
