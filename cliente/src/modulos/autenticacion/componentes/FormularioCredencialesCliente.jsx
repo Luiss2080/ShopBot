@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { User, Mail, Lock, ShieldCheck, ArrowRight, Package, ShoppingBag, BarChart3, LogOut } from 'lucide-react';
+import { User, Mail, Lock, ArrowRight, Package, LogOut } from 'lucide-react';
 import { useEstadoSesion } from '../contexto/ProveedorEstadoSesion';
+import HistorialPedidosCliente from './HistorialPedidosCliente';
 
 export default function FormularioCredencialesCliente({ onCerrarModal }) {
   const [pestanaActiva, setPestanaActiva] = useState('login');
+  const [subVistaAutenticado, setSubVistaAutenticado] = useState('perfil');
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,18 +27,45 @@ export default function FormularioCredencialesCliente({ onCerrarModal }) {
 
   if (estaAutenticado && usuarioActual) {
     return (
-      <div className="max-w-[420px] mx-auto w-full text-center bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-        <div className="w-16 h-16 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
-          {usuarioActual.nombre ? usuarioActual.nombre.charAt(0).toUpperCase() : 'U'}
+      <div className="max-w-[420px] mx-auto w-full bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <div className="flex bg-slate-100 p-1 rounded-xl mb-5">
+          <button
+            type="button"
+            onClick={() => setSubVistaAutenticado('perfil')}
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+              subVistaAutenticado === 'perfil' ? 'bg-white shadow-sm text-slate-800' : 'text-slate-500'
+            }`}
+          >
+            <User size={14} /> Mi Perfil
+          </button>
+          <button
+            type="button"
+            onClick={() => setSubVistaAutenticado('pedidos')}
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+              subVistaAutenticado === 'pedidos' ? 'bg-white shadow-sm text-slate-800' : 'text-slate-500'
+            }`}
+          >
+            <Package size={14} /> Mis Pedidos
+          </button>
         </div>
-        <h3 className="text-xl font-bold text-slate-800 mb-1">{usuarioActual.nombre}</h3>
-        <p className="text-sm text-slate-500 mb-6">{usuarioActual.email}</p>
-        <button
-          onClick={() => { cerrarSesion(); onCerrarModal(); }}
-          className="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
-        >
-          <LogOut size={16} /> Cerrar Sesión
-        </button>
+
+        {subVistaAutenticado === 'perfil' ? (
+          <div className="text-center py-4">
+            <div className="w-16 h-16 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-inner">
+              {usuarioActual.nombre ? usuarioActual.nombre.charAt(0).toUpperCase() : 'U'}
+            </div>
+            <h3 className="text-xl font-bold text-slate-800 mb-1">{usuarioActual.nombre}</h3>
+            <p className="text-sm text-slate-500 mb-6">{usuarioActual.email}</p>
+            <button
+              onClick={() => { cerrarSesion(); onCerrarModal(); }}
+              className="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+            >
+              <LogOut size={16} /> Cerrar Sesión
+            </button>
+          </div>
+        ) : (
+          <HistorialPedidosCliente onIrACatalogo={onCerrarModal} />
+        )}
       </div>
     );
   }

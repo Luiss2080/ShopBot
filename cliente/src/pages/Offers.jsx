@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Tag, Sparkles } from 'lucide-react';
-import ProductList from '../components/ProductList';
+import GrillaProductosCatalogo from '../modulos/catalogo/componentes/GrillaProductosCatalogo';
 
 export default function Offers({ loadCart }) {
   return (
@@ -28,8 +28,7 @@ export default function Offers({ loadCart }) {
         </div>
       </div>
       
-      {/* Reutilizamos el ProductList para simplificar en este prototipo */}
-      <ProductList onAddToCart={loadCart} />
+      <GrillaProductosCatalogo onAddToCart={loadCart} />
     </motion.div>
   );
 }
