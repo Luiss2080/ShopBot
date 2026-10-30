@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Eye } from 'lucide-react';
 
@@ -58,11 +59,10 @@ export default function TarjetaProductoCatalogo({ producto, onAddToCart, onClick
       
       {/* Información del producto */}
       <div className="p-5 flex flex-col flex-1">
-        <h3 
-          className="text-lg font-bold text-slate-900 leading-tight mb-2 line-clamp-1 cursor-pointer hover:text-brand-500 transition-colors" 
-          onClick={() => onClickView(producto)}
-        >
-          {producto.nombre}
+        <h3 className="text-lg font-bold text-slate-900 leading-tight mb-2 line-clamp-1 hover:text-brand-500 transition-colors">
+          <Link to={`/producto/${producto.id}`}>
+            {producto.nombre}
+          </Link>
         </h3>
         <p className="text-slate-500 text-sm mb-4 line-clamp-2 flex-1">
           {producto.descripcion}
