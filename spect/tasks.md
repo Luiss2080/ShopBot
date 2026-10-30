@@ -32,3 +32,12 @@
 - [x] Desacoplar `Checkout.jsx` en componentes atómicos (`FormularioDatosEnvio`, `FormularioMetodoPago`, `PanelResumenOrden`, `TarjetaConfirmacionExitosa`).
 - [x] Implementar cliente HTTP `ClienteApiOrdenes` y hook `useFlujoProcesoCheckout`.
 - [x] Añadir pruebas unitarias y de integración de órdenes (10 suites, 23 tests pasando).
+
+## Fase 6: Dominio de Autenticación y Cuentas de Usuario
+- [x] Crear migración de base de datos para la tabla `Usuarios` con email único.
+- [x] Implementar servicio de hashing criptográfico seguro con `scrypt` y sal aleatoria (`crypto` nativo).
+- [x] Implementar dominio de autenticación backend (`servidor/dominios/autenticacion`).
+- [x] Crear contexto de estado global `ProveedorEstadoSesion.jsx` con persistencia en `localStorage`.
+- [x] Conectar formulario interactivo de login y registro en el frontend (`FormularioCredencialesCliente.jsx`).
+- [x] Actualizar cabecera con perfil de usuario y opción de cierre de sesión (`CabeceraNavegacionPrincipal.jsx`).
+- [x] Añadir pruebas unitarias y de integración de autenticación (12 suites, 31 tests pasando al 100%).

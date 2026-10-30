@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/react-19-149eca?style=for-the-badge&logo=react&logoColor=white" alt="React 19" />
   <img src="https://img.shields.io/badge/express-5-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express 5" />
   <img src="https://img.shields.io/badge/tailwind-3.4-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind 3.4" />
-  <img src="https://img.shields.io/badge/tests-23%20pasan-16a34a?style=for-the-badge" alt="23 tests pasan" />
+  <img src="https://img.shields.io/badge/tests-31%20pasan-16a34a?style=for-the-badge" alt="31 tests pasan" />
   <img src="https://img.shields.io/badge/swagger-activo-85ea2d?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger Activo" />
   <img src="https://img.shields.io/badge/licencia-MIT-lightgrey?style=for-the-badge" alt="Licencia MIT" />
   <p>
@@ -34,6 +34,7 @@
 |---|---|
 | **Catálogo de Productos** | Listado de productos con filtros por categoría, vista rápida modal y búsqueda parametrizada vía `ClienteApiProductos`. |
 | **Carrito Persistente** | Gestión reactiva de carrito ligada a sesión vía cabecera `x-session-id`, cálculo dinámico de subtotales y cantidades. |
+| **Autenticación y Cuentas** | Registro y login seguro con sal y hashing criptográfico `scrypt`, contexto reactivo global (`useEstadoSesion`) y persistencia. |
 | **Órdenes y Checkout ACID** | Creación de pedidos persistentes (`Ordenes` y `DetallesOrden`), numeración única (`ORD-...`) y vaciado atómico de cesta en una sola transacción. |
 | **Asistente Inteligente (NLP)** | Motor `Node-NLP` integrado con clasificación semántica de intenciones (`saludo`, `consulta_producto`, `agregar_carrito`, fallback). |
 | **Respuestas Enriquecidas** | El bot retorna texto contextual, opciones rápidas de navegación (chips interactivos) y micro-tarjetas de productos con compra directa. |
