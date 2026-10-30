@@ -101,3 +101,4 @@ describe('ServicioGestionCupones (Pruebas Unitarias)', () => {
         expect(mockRepositorio.obtenerCuponesVigentes).toHaveBeenCalled();
     });
 });
+

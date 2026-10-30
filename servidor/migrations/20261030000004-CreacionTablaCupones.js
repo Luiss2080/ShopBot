@@ -57,3 +57,4 @@ module.exports = {
     await queryInterface.dropTable('Cupones');
   }
 };
+

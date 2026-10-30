@@ -52,3 +52,4 @@ ModeloCuponSequelize.init({
 });
 
 module.exports = ModeloCuponSequelize;
+

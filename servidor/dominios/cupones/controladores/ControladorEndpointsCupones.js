@@ -47,3 +47,4 @@ class ControladorEndpointsCupones {
 }
 
 module.exports = ControladorEndpointsCupones;
+

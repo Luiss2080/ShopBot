@@ -71,3 +71,4 @@ export default function FormularioAplicacionCupon({ subtotal, cuponAplicado, onA
     </form>
   );
 }
+

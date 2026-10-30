@@ -28,3 +28,4 @@ class ValidadorAplicacionCupon {
 }
 
 module.exports = ValidadorAplicacionCupon;
+

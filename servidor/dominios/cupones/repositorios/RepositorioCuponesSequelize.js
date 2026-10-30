@@ -36,3 +36,4 @@ class RepositorioCuponesSequelize {
 }
 
 module.exports = RepositorioCuponesSequelize;
+
