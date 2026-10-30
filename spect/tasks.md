@@ -41,3 +41,13 @@
 - [x] Conectar formulario interactivo de login y registro en el frontend (`FormularioCredencialesCliente.jsx`).
 - [x] Actualizar cabecera con perfil de usuario y opción de cierre de sesión (`CabeceraNavegacionPrincipal.jsx`).
 - [x] Añadir pruebas unitarias y de integración de autenticación (12 suites, 31 tests pasando al 100%).
+
+## Fase 7: Perfeccionamiento Conversacional, Historial de Pedidos y Cobertura Formal
+- [x] Implementar intenciones conversacionales `consulta_precio` y `agregar_carrito` con extracción de stop-words y búsqueda contextual en `GeneradorRespuestasContextuales.js`.
+- [x] Crear suite de pruebas unitarias exhaustiva `GeneradorRespuestasContextuales.test.js` (12 nuevos tests, 100% de cobertura de líneas del generador).
+- [x] Implementar visualizador de historial de pedidos `HistorialPedidosCliente.jsx` conectado a `ClienteApiOrdenes.obtenerHistorialOrdenesSesion()`.
+- [x] Integrar selector de pestaña entre Perfil y Mis Pedidos en `FormularioCredencialesCliente.jsx`.
+- [x] Eliminar shims obsoletos (`cliente/src/components` y `cliente/src/services/api.js`) y migrar rutas directas en `App.jsx`, `Home.jsx`, `Catalog.jsx`, `Offers.jsx`.
+- [x] Crear `WidgetChatbotConversacional.jsx` en el módulo de asistente-conversacional.
+- [x] Configurar `jest.config.js` y script `"test:coverage"` en `package.json` con umbral mínimo de 70% de cobertura.
+- [x] Cobertura global alcanzada de 78% y 100% tests aprobados (13 suites, 43 pruebas unitarias e integración).
