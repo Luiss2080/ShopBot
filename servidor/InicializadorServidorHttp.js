@@ -3,8 +3,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const swaggerUi = require('swagger-ui-express');
 
 const VariablesEntornoServidor = require('./configuracion/VariablesEntornoServidor');
+const especificacionSwagger = require('./configuracion/EspecificacionDocumentacionSwagger');
 const InterceptorRegistroSolicitudesHttp = require('./middlewares/InterceptorRegistroSolicitudesHttp');
 const InterceptorManejoErroresCentralizado = require('./middlewares/InterceptorManejoErroresCentralizado');
 const ValidadorIdentificadorSesionHttp = require('./middlewares/ValidadorIdentificadorSesionHttp');
@@ -22,6 +24,9 @@ function instanciarServidorHttp() {
     aplicacionExpress.use(bodyParser.urlencoded({ extended: true, limit: VariablesEntornoServidor.limitesCargaBody }));
     aplicacionExpress.use(InterceptorRegistroSolicitudesHttp.registrar);
     aplicacionExpress.use('/api', ValidadorIdentificadorSesionHttp.asegurarSesionPresente);
+
+    // Documentación Swagger OpenAPI
+    aplicacionExpress.use('/api-docs', swaggerUi.serve, swaggerUi.setup(especificacionSwagger));
 
     // Archivos estáticos de frontend (SPA)
     const rutaEstaticosCliente = path.join(__dirname, '..', 'cliente', 'dist');
@@ -56,4 +61,3 @@ function instanciarServidorHttp() {
 }
 
 module.exports = instanciarServidorHttp;
-
