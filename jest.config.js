@@ -5,7 +5,9 @@ module.exports = {
   collectCoverageFrom: [
     'servidor/**/*.js',
     '!servidor/configuracion/EspecificacionDocumentacionSwagger.js',
-    '!servidor/dominios/asistente-chat/motor-nlp/EntrenadorCorpusConversacional.js'
+    '!servidor/dominios/asistente-chat/motor-nlp/EntrenadorCorpusConversacional.js',
+    '!servidor/migrations/**',
+    '!servidor/seeders/**'
   ],
   coverageThreshold: {
     global: {
