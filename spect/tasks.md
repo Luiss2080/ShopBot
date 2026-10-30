@@ -69,3 +69,12 @@
 - [x] Integrar acordeón de rastreo en tiempo real dentro de `HistorialPedidosCliente.jsx`.
 - [x] Crear pruebas unitarias exhaustivas para `seguimiento_orden` con y sin código (3 nuevos tests).
 - [x] Incrementar cobertura de servidor al 81.36% de líneas y 48 tests aprobados al 100% (13 suites).
+
+## Fase 10: Dominio de Cupones y Descuentos Promocionales en Checkout y Chatbot
+- [x] Crear migración `20261030000004-CreacionTablaCupones.js` y seeder con cupones iniciales (`SHOPBOT10`, `BIENVENIDA20`).
+- [x] Implementar dominio completo de cupones (`ModeloCuponSequelize`, `RepositorioCuponesSequelize`, `ValidadorAplicacionCupon`, `ServicioGestionCupones`, `ControladorEndpointsCupones`, `DefinicionRutasCupones`).
+- [x] Registrar intención conversacional `consulta_cupon` en `EntrenadorCorpusConversacional.js` y `GeneradorRespuestasContextuales.js`.
+- [x] Crear cliente frontend `ClienteApiCupones.js` y componente reactivo `FormularioAplicacionCupon.jsx` (< 75 líneas).
+- [x] Conectar validación y cálculo de descuento dinámico en `PanelResumenOrden.jsx` y `FormularioMetodoPago.jsx`.
+- [x] Añadir suite unitaria `ServicioGestionCupones.test.js` e integración `RutasApiCupones.test.js` (13 nuevos tests).
+- [x] Incrementar cobertura de servidor al 83.01% de líneas y 61 tests aprobados al 100% (15 suites).
