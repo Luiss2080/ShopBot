@@ -43,9 +43,11 @@ export function useConversacionChatbot(onAddToCart) {
         products: contenidoRespuesta.products
       }]);
 
-      if (textoBot && textoBot.toLowerCase().includes('carrito') && onAddToCart) {
+      if ((contenidoRespuesta?.carritoModificado || (textoBot && textoBot.toLowerCase().includes('he añadido'))) && onAddToCart) {
         onAddToCart();
-        toast.success('Carrito actualizado desde el chat', { icon: '🤖' });
+        toast.success('¡Producto añadido al carrito por el asistente!', { icon: '🛍️' });
+      } else if (textoBot && textoBot.toLowerCase().includes('carrito') && onAddToCart) {
+        onAddToCart();
       }
     } catch (error) {
       console.error('Error al comunicar con ShopBot:', error);

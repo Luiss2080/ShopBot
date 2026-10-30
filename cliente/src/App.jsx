@@ -12,6 +12,7 @@ import Catalog from './pages/Catalog';
 import Checkout from './pages/Checkout';
 import Offers from './pages/Offers';
 import About from './pages/About';
+import DetalleProducto from './pages/DetalleProducto';
 import ClienteApiCarrito from './modulos/carrito/servicios/ClienteApiCarrito';
 
 function AnimatedRoutes({ loadCart, cart }) {
@@ -25,6 +26,7 @@ function AnimatedRoutes({ loadCart, cart }) {
         <Route path="/ofertas" element={<Offers loadCart={loadCart} />} />
         <Route path="/acerca" element={<About />} />
         <Route path="/checkout" element={<Checkout cart={cart} refreshCart={loadCart} />} />
+        <Route path="/producto/:id" element={<DetalleProducto loadCart={loadCart} />} />
         <Route path="*" element={<Home loadCart={loadCart} />} />
       </Routes>
     </AnimatePresence>
