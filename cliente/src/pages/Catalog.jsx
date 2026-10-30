@@ -1,4 +1,4 @@
-import ProductList from '../components/ProductList';
+import GrillaProductosCatalogo from '../modulos/catalogo/componentes/GrillaProductosCatalogo';
 
 export default function Catalog({ loadCart }) {
   return (
@@ -8,7 +8,7 @@ export default function Catalog({ loadCart }) {
         <p className="text-slate-500 mt-2 text-lg">Explora todos nuestros productos tecnológicos disponibles.</p>
       </div>
       
-      <ProductList onAddToCart={loadCart} />
+      <GrillaProductosCatalogo onAddToCart={loadCart} />
     </div>
   );
 }
