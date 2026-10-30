@@ -61,3 +61,11 @@
 - [x] Conectar enlaces y títulos en `TarjetaProductoCatalogo.jsx` hacia `/producto/:id`.
 - [x] Corregir renderizado de imagen de producto en carrusel de chat (`CarruselProductosChat.jsx`).
 - [x] Incrementar cobertura de servidor al 80.86% de líneas y 45 tests aprobados al 100% (13 suites).
+
+## Fase 9: Seguimiento y Rastreo Conversacional de Órdenes (Order Tracking & Stepper Timeline)
+- [x] Registrar intención `seguimiento_orden` en `EntrenadorCorpusConversacional.js`.
+- [x] Inyectar `ServicioGestionOrdenes` en `GeneradorRespuestasContextuales.js` para resolución de tracking por código `ORD-...` o por sesión.
+- [x] Diseñar e implementar componente visual `TarjetaSeguimientoOrden.jsx` (< 70 líneas) con línea de tiempo interactiva según estado transaccional.
+- [x] Integrar acordeón de rastreo en tiempo real dentro de `HistorialPedidosCliente.jsx`.
+- [x] Crear pruebas unitarias exhaustivas para `seguimiento_orden` con y sin código (3 nuevos tests).
+- [x] Incrementar cobertura de servidor al 81.36% de líneas y 48 tests aprobados al 100% (13 suites).
