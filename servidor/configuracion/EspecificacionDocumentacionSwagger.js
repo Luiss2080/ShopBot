@@ -34,3 +34,4 @@ const opcionesSwagger = {
 const especificacionSwaggerCompilada = swaggerJsdoc(opcionesSwagger);
 
 module.exports = especificacionSwaggerCompilada;
+

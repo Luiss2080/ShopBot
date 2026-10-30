@@ -19,3 +19,4 @@ describe('API de Salud y Documentación OpenAPI', () => {
         expect([200, 301, 302]).toContain(respuesta.status);
     });
 });
+
