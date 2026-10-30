@@ -17,6 +17,7 @@ const crearEnrutadorCarrito = require('./dominios/carrito/rutas/DefinicionRutasC
 const crearEnrutadorChat = require('./dominios/asistente-chat/rutas/DefinicionRutasChat');
 const crearEnrutadorOrdenes = require('./dominios/ordenes/rutas/DefinicionRutasOrdenes');
 const crearEnrutadorAutenticacion = require('./dominios/autenticacion/rutas/DefinicionRutasAutenticacion');
+const crearEnrutadorCupones = require('./dominios/cupones/rutas/DefinicionRutasCupones');
 
 function instanciarServidorHttp() {
     const aplicacionExpress = express();
@@ -40,6 +41,7 @@ function instanciarServidorHttp() {
     aplicacionExpress.use('/api/chat', crearEnrutadorChat());
     aplicacionExpress.use('/api/ordenes', crearEnrutadorOrdenes());
     aplicacionExpress.use('/api/autenticacion', crearEnrutadorAutenticacion());
+    aplicacionExpress.use('/api/cupones', crearEnrutadorCupones());
 
     // Endpoint de monitoreo y salud
     aplicacionExpress.get('/api/salud', (req, res) => {
