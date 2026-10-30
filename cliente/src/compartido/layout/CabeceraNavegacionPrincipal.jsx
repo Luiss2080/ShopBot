@@ -3,10 +3,12 @@ import { ShoppingCart, User, Menu } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BarraBusquedaGlobalCatalogo from '../componentes/BarraBusquedaGlobalCatalogo';
 import InterruptorTemaVisual from '../componentes/InterruptorTemaVisual';
+import { useEstadoSesion } from '../../modulos/autenticacion/contexto/ProveedorEstadoSesion';
 
 export default function CabeceraNavegacionPrincipal({ toggleCart, cartCount, openLogin }) {
   const location = useLocation();
   const esRutaActiva = (ruta) => location.pathname === ruta;
+  const { usuarioActual, estaAutenticado } = useEstadoSesion();
 
   return (
     <header className="sticky top-0 z-40 bg-surface/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
@@ -45,10 +47,12 @@ export default function CabeceraNavegacionPrincipal({ toggleCart, cartCount, ope
               onClick={openLogin}
               className="hidden sm:flex items-center gap-2 p-1.5 px-3 border border-slate-200 dark:border-slate-700 rounded-2xl cursor-pointer hover:shadow-sm transition-all"
             >
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white">
-                <User size={14} />
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white text-xs font-bold">
+                {estaAutenticado && usuarioActual?.nombre ? usuarioActual.nombre.charAt(0).toUpperCase() : <User size={14} />}
               </div>
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Mi Cuenta</span>
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                {estaAutenticado && usuarioActual?.nombre ? usuarioActual.nombre.split(' ')[0] : 'Mi Cuenta'}
+              </span>
             </div>
             
             <motion.button 
