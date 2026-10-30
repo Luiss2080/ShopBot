@@ -182,6 +182,12 @@ describe('GeneradorRespuestasContextuales (Pruebas Unitarias)', () => {
         expect(respuesta.text).toContain('No encontré pedidos asociados');
     });
 
+    test('debe responder a consulta_cupon con el código promocional destacado', async () => {
+        const respuesta = await generador.generarRespuesta({ intencion: 'consulta_cupon' });
+        expect(respuesta.text).toContain('SHOPBOT10');
+        expect(respuesta.options).toEqual(['Ver catálogo', 'Ver mi carrito']);
+    });
+
     test('debe emitir fallback cuando la intención es desconocida', async () => {
         const respuesta = await generador.generarRespuesta({ intencion: 'consulta_clima' }, '¿va a llover hoy?');
         expect(MensajesSistemaConversacional.FALLBACK_DESCONOCIDO).toContain(respuesta.text);

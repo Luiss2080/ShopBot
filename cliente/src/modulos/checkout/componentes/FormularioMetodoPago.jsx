@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CreditCard } from 'lucide-react';
 import PanelResumenOrden from './PanelResumenOrden';
 
 export default function FormularioMetodoPago({ items, total, estaCargando, onProcesarPago, onVolverAtras }) {
+  const [cuponAplicado, setCuponAplicado] = useState(null);
+
   const manejarPago = (e) => {
     e.preventDefault();
-    onProcesarPago();
+    onProcesarPago(cuponAplicado);
   };
 
   return (
@@ -72,9 +75,11 @@ export default function FormularioMetodoPago({ items, total, estaCargando, onPro
         items={items} 
         total={total} 
         estaCargando={estaCargando} 
-        onVolverAtras={onVolverAtras} 
+        onVolverAtras={onVolverAtras}
+        cuponAplicado={cuponAplicado}
+        onAplicarCupon={setCuponAplicado}
+        onRemoverCupon={() => setCuponAplicado(null)}
       />
     </motion.div>
   );
 }
-
