@@ -1,15 +1,10 @@
 'use strict';
 
 const request = require('supertest');
-const { instanciarServidorHttp } = require('../../servidor/InicializadorServidorHttp');
+const app = require('../../index');
 
 describe('Rutas HTTP de API de Cupones (/api/cupones)', () => {
-    let app;
     const sesionIdPrueba = 'test-session-cupones-12345';
-
-    beforeAll(() => {
-        app = instanciarServidorHttp();
-    });
 
     test('POST /api/cupones/validar - debe validar exitosamente el cupón SHOPBOT10', async () => {
         const respuesta = await request(app)
