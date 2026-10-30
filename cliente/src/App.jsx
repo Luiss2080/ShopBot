@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AnimatePresence } from 'framer-motion';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
+import CabeceraNavegacionPrincipal from './compartido/layout/CabeceraNavegacionPrincipal';
+import PiePaginaInformativo from './compartido/layout/PiePaginaInformativo';
+import PanelLateralCarrito from './modulos/carrito/componentes/PanelLateralCarrito';
+import WidgetChatbotConversacional from './modulos/asistente-conversacional/componentes/WidgetChatbotConversacional';
+import ModalAutenticacionCliente from './modulos/autenticacion/componentes/ModalAutenticacionCliente';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import Checkout from './pages/Checkout';
 import Offers from './pages/Offers';
 import About from './pages/About';
-import CartDrawer from './components/CartDrawer';
-import ChatWidget from './components/ChatWidget';
-import LoginModal from './components/LoginModal';
 import ClienteApiCarrito from './modulos/carrito/servicios/ClienteApiCarrito';
 
 function AnimatedRoutes({ loadCart, cart }) {
@@ -54,7 +54,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col font-sans bg-slate-50 text-slate-900 transition-colors duration-300">
-        <Header 
+        <CabeceraNavegacionPrincipal 
           toggleCart={() => setIsCartOpen(true)} 
           cartCount={totalItems} 
           openLogin={() => setIsLoginOpen(true)}
@@ -64,21 +64,21 @@ function App() {
           <AnimatedRoutes loadCart={loadCart} cart={cart} />
         </main>
 
-        <Footer />
+        <PiePaginaInformativo />
 
-        <CartDrawer 
+        <PanelLateralCarrito 
           isOpen={isCartOpen} 
           onClose={() => setIsCartOpen(false)} 
           cart={cart}
           refreshCart={loadCart}
         />
 
-        <LoginModal 
+        <ModalAutenticacionCliente 
           isOpen={isLoginOpen} 
           onClose={() => setIsLoginOpen(false)} 
         />
 
-        <ChatWidget onAddToCart={loadCart} />
+        <WidgetChatbotConversacional onAddToCart={loadCart} />
         
         <Toaster 
           position="top-center" 
