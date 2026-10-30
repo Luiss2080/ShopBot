@@ -22,3 +22,13 @@
 - [x] Respuestas enriquecidas del chatbot con tarjetas de producto y botones de compra directa.
 - [x] Sistema de fallback interactivo con opciones rápidas de navegación (chips).
 - [x] Manejo de sesión persistente transparente con `x-session-id`.
+- [x] Soporte completo de Dark/Light mode accesible (`ProveedorPreferenciaTema.jsx`).
+- [x] Búsqueda global reactiva conectada al catálogo con query params.
+
+## Fase 5: Dominio de Órdenes y Checkout Transaccional
+- [x] Crear migraciones de base de datos para `Ordenes` y `DetallesOrden`.
+- [x] Implementar dominio de órdenes en backend (`servidor/dominios/ordenes`).
+- [x] Transacciones gestionadas ACID para crear orden y vaciar carrito en una sola operación.
+- [x] Desacoplar `Checkout.jsx` en componentes atómicos (`FormularioDatosEnvio`, `FormularioMetodoPago`, `PanelResumenOrden`, `TarjetaConfirmacionExitosa`).
+- [x] Implementar cliente HTTP `ClienteApiOrdenes` y hook `useFlujoProcesoCheckout`.
+- [x] Añadir pruebas unitarias y de integración de órdenes (10 suites, 23 tests pasando).
